@@ -1,14 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import { App } from "./App";
-import { Auth } from "./pages";
+import { createBrowserRouter } from 'react-router-dom';
+import { App } from './App';
+import { Auth } from './pages';
 
 export const Router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "/Auth",
+        path: '/Auth',
         element: <Auth />,
       },
     ],
