@@ -1,25 +1,34 @@
 import { Button, Input } from '@/components/ui';
 import { Controller, useForm } from 'react-hook-form';
-import { FormFields, validationSchema } from './constants/validation';
+import { validationSchema } from './constants/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FormFields } from './types/form';
+import { onSubmit } from './utils/submit';
 
 export const Auth = () => {
-  const { handleSubmit, control } = useForm<FormFields>({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormFields>({
     resolver: zodResolver(validationSchema),
   });
 
   return (
     <form
-      className="flex flex-col max-w-prose mx-3 gap-5 "
-      onSubmit={handleSubmit((data) => console.log(data))}
+      className="flex flex-col max-w-prose gap-5 "
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Controller
         control={control}
         name="email"
         render={({ field }) => (
           <label>
-            <span>Email</span>
-            <Input type="email" {...field} />
+            Email
+            <Input type="email" {...field} isError={!!errors.email} />
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
           </label>
         )}
       />
@@ -29,8 +38,11 @@ export const Auth = () => {
         name="password"
         render={({ field }) => (
           <label>
-            <span>Пароль</span>
-            <Input type="password" {...field} />
+            Пароль
+            <Input type="password" {...field} isError={!!errors.password} />
+            {errors.password && (
+              <span className="text-red-500">{errors.password.message}</span>
+            )}
           </label>
         )}
       />

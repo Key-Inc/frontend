@@ -7,5 +7,3 @@ export const validationSchema = z.object({
     .min(1, 'Ожидалось значение')
     .max(100, 'Максимальная длина: 100 символов.'),
 });
-
-export type FormFields = z.infer<typeof validationSchema>;
