@@ -1,3 +1,4 @@
+import { ACCOUNT } from '@/lib/constants/api';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -41,15 +42,11 @@ export const useRegistrationsRequests = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get<RegistrationRequestPagedListDto>(
-          `http://localhost:31299/api/account/consideration`,
-          {
-            params: configParams,
-          },
-        );
+        const res = await axios.get<RegistrationRequestPagedListDto>(`${ACCOUNT}/consideration`, {
+          params: configParams,
+        });
         setUsers(res.data.users);
         setValues({ ...configParams });
-        console.log({ ...configParams });
       } catch (error) {
         if (values.FullName) params.set('FullName', values.FullName);
         if (values.Page) params.set('Page', values.Page);

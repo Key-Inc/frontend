@@ -1,9 +1,7 @@
-import { Button } from '@/components/ui';
 import { RegistrationRequests } from '@/features/RegistrationRequests/RegistrationRequests';
 
 export const RegistrationRequestsPage = () => (
-  <div>
-    <Button>freasdasd</Button>
+  <div className='m-16'>
     <RegistrationRequests />
   </div>
 );
