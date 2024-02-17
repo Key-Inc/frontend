@@ -2,7 +2,7 @@ import { Button } from '@/components/ui';
 import { RegistrationRequests } from '@/features/RegistrationRequests/RegistrationRequests';
 
 export const RegistrationRequestsPage = () => (
-  <div className=''>
+  <div>
     <Button>freasdasd</Button>
     <RegistrationRequests />
   </div>
