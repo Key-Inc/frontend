@@ -1,5 +1,5 @@
 import { MockServerConfig } from 'mock-config-server';
-import { loginConfig } from './mock/users/login';
+import { loginConfig } from './mock';
 
 const mockServerConfig: MockServerConfig = {
   rest: {
