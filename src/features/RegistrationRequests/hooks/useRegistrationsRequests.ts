@@ -17,11 +17,11 @@ export const useRegistrationsRequests = () => {
   const [params, setParams] = useSearchParams();
 
   const nextPage = () => {
-    setParamsByName('page', String(Number(params.get('page') || '1') + 1));
+    setParamsByName('Page', String(Number(params.get('Page') || '1') + 1));
   };
 
   const previousPage = () => {
-    setParamsByName('page', String(Number(params.get('page')!) - 1));
+    setParamsByName('Page', String(Number(params.get('Page')!) - 1));
   };
 
   const setParamsByName = (name: string, value: string) => {
