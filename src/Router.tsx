@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
-import { Auth } from './pages';
+import { AuthPage } from './pages';
 
 export const Router = createBrowserRouter([
   {
@@ -8,8 +8,8 @@ export const Router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/Auth',
-        element: <Auth />,
+        path: '/auth',
+        element: <AuthPage />,
       },
     ],
   },
