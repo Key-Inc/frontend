@@ -23,7 +23,7 @@ export const RegistrationRequests = () => {
         <Input placeholder='Имя' className='w-48' onChange={(e) => setParamsByName('FullName', e.target.value)} />
       </div>
 
-      <div className='flex gap-4 flex-wrap items-center'>
+      <div className='flex gap-4 flex-wrap items-center justify-center'>
         {users.map((user, index) => (
           <RegistrationRequestCard user={user} key={index} />
         ))}
