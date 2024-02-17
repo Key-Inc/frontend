@@ -2,18 +2,10 @@ import { ACCOUNT } from '@/lib/constants/api';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-
-export interface QueryParams {
-  FullName: string | null;
-  Page: string | null;
-  Gender: string | null;
-  MinAge: string | null;
-  MaxAge: string | null;
-  Sorting: string | null;
-}
+import { registrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
 
 export const useRegistrationsRequests = () => {
-  const [values, setValues] = useState<QueryParams>({} as QueryParams);
+  const [values, setValues] = useState<registrationsRequestsQueryParams>({} as registrationsRequestsQueryParams);
   const [users, setUsers] = useState<UserDto[]>([]);
   const [params, setParams] = useSearchParams();
 

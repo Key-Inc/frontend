@@ -1,33 +1,18 @@
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRegistrationRequestCard } from './useRegistrationRequestCard';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface RegistrationRequestCardProps {
   user: UserDto;
 }
 export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) => {
-  const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(
-    user.id,
-    user.userRole,
-  );
+  const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(user.id, user.userRole);
+
   return (
-    <Card className='w-[350px]'>
+    <Card className='min-w-[330px] max-w-[440px] flex-1'>
       <CardHeader>
-        <CardTitle>{user.fullName}</CardTitle>
+        <CardTitle className='text-xl'>{user.fullName}</CardTitle>
         <CardDescription>{user.phoneNumber}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-col'>
