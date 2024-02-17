@@ -1,12 +1,17 @@
-import { MockServerConfig } from 'mock-config-server';
+import type { MockServerConfig } from 'mock-config-server';
+
+import * as requests from './mock';
 
 const mockServerConfig: MockServerConfig = {
-  rest: {
-    baseUrl: '/api',
-    configs: [],
+  baseUrl: '/api',
+  cors: {
+    origin: 'http://localhost:31299',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['content-type', 'authorization'],
+    credentials: true,
   },
-  interceptors: {
-    request: ({ setDelay }) => setDelay(1000),
+  rest: {
+    configs: Object.values(requests),
   },
 };
 
