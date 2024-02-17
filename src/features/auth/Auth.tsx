@@ -1,28 +1,14 @@
 import { Button, Input } from '@/components/ui';
-import { Controller, useForm } from 'react-hook-form';
-import { validationSchema } from './constants/validation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormFields } from './types/form';
-import { onSubmit } from './utils/submit';
+import { Controller } from 'react-hook-form';
+import { useLoginForm } from './hooks/useLoginForm';
 
 export const Auth = () => {
-  const {
-    handleSubmit,
-    control,
-    setError,
-    formState: { errors },
-  } = useForm<FormFields>({
-    resolver: zodResolver(validationSchema),
-  });
+  const { control, errors, handleSubmit, onSubmit } = useLoginForm();
 
   return (
     <form
       className="flex flex-col max-w-prose gap-5 "
-      onSubmit={(e) => {
-        handleSubmit(onSubmit)(e).catch((e) => {
-          setError('root', { message: e });
-        });
-      }}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Controller
         control={control}
@@ -54,7 +40,7 @@ export const Auth = () => {
       <Button type="submit" className="mt-3">
         Логин
       </Button>
-      {errors.root?.message && (
+      {errors.root && (
         <span className="text-red-500 -mt-3">{errors.root.message}</span>
       )}
     </form>

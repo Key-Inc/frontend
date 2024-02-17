@@ -1,9 +1,8 @@
-import { SubmitHandler } from 'react-hook-form';
 import { FormFields } from '../types/form';
 import axios, { AxiosError } from 'axios';
 import { LOGIN } from '@/lib/constants/api';
 
-export const onSubmit: SubmitHandler<FormFields> = async (data) => {
+export const loginRequest = async (data: FormFields) => {
   try {
     const res = await axios.post<{ token: string }>(LOGIN, data);
     return res;
