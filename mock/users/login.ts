@@ -1,6 +1,6 @@
 import { RestRequestConfig } from 'mock-config-server';
 
-export const loginConfig: RestRequestConfig = {
+export const postAuthLogin: RestRequestConfig = {
   path: '/account/login',
   method: 'post',
   routes: [

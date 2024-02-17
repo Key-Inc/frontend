@@ -7,12 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
-  const {
-    handleSubmit,
-    control,
-    setError,
-    formState: { errors },
-  } = useForm<FormFields>({
+  const form = useForm<FormFields>({
     resolver: zodResolver(validationSchema),
   });
 
@@ -22,14 +17,13 @@ export const useLoginForm = () => {
       document.cookie = `token=${res.data.token}`;
       navigate('/');
     } catch (e) {
-      setError('root', { message: String(e) });
+      form.setError('root', { message: String(e) });
     }
   };
 
   return {
-    handleSubmit,
-    control,
-    errors,
+    form,
+    errors: form.formState.errors,
     onSubmit,
   };
 };
