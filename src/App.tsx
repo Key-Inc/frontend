@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui';
+import { Outlet } from 'react-router-dom';
+
 export const App = () => (
-  <>
-    <Button variant="outline">Button</Button>
-  </>
+  <div className="min-h-screen">
+    <Outlet />
+  </div>
 );
