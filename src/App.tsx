@@ -1,8 +1,7 @@
-import { Button } from '@/components/ui';
-import { Auth } from './features/auth';
+import { Outlet } from 'react-router-dom';
+
 export const App = () => (
-  <>
-    <Button variant="outline">Button</Button>
-    <Auth />
-  </>
+  <div className="min-h-screen">
+    <Outlet />
+  </div>
 );

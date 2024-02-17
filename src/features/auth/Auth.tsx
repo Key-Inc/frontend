@@ -7,7 +7,7 @@ export const Auth = () => {
 
   return (
     <form
-      className="flex flex-col max-w-prose gap-5 "
+      className="flex flex-col max-w-prose gap-7 "
       onSubmit={handleSubmit(onSubmit)}
     >
       <Controller
@@ -18,7 +18,9 @@ export const Auth = () => {
             Email
             <Input type="email" {...field} isError={!!errors.email} />
             {errors.email && (
-              <span className="text-red-500">{errors.email.message}</span>
+              <span className="text-red-500 absolute">
+                {errors.email.message}
+              </span>
             )}
           </label>
         )}
@@ -32,7 +34,9 @@ export const Auth = () => {
             Пароль
             <Input type="password" {...field} isError={!!errors.password} />
             {errors.password && (
-              <span className="text-red-500">{errors.password.message}</span>
+              <span className="text-red-500 absolute">
+                {errors.password.message}
+              </span>
             )}
           </label>
         )}
