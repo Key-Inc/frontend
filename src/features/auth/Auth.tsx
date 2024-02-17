@@ -9,6 +9,7 @@ export const Auth = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors },
   } = useForm<FormFields>({
     resolver: zodResolver(validationSchema),
@@ -17,7 +18,11 @@ export const Auth = () => {
   return (
     <form
       className="flex flex-col max-w-prose gap-5 "
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => {
+        handleSubmit(onSubmit)(e).catch((e) => {
+          setError('root', { message: e });
+        });
+      }}
     >
       <Controller
         control={control}
@@ -46,10 +51,12 @@ export const Auth = () => {
           </label>
         )}
       />
-
       <Button type="submit" className="mt-3">
         Логин
       </Button>
+      {errors.root?.message && (
+        <span className="text-red-500 -mt-3">{errors.root.message}</span>
+      )}
     </form>
   );
 };
