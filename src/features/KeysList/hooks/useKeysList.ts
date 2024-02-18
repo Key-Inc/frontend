@@ -10,7 +10,7 @@ export const useKeysList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get<KeyFullDto[]>(`${KEYS}`, {}); //${`?keyStatus=${keyStatus}`}
+        const res = await axios.get<KeyFullDto[]>(`${KEYS}${keyStatus ? `?keyStatus=${keyStatus}` : ''}`, {});
         setKeys(res.data);
       } catch (e) {
         if (e instanceof AxiosError) {
@@ -21,7 +21,7 @@ export const useKeysList = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [keyStatus]);
 
   return { keys, setKeyStatus };
 };
