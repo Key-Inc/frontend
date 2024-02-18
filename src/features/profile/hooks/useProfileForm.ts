@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { validationSchema } from '../constants/validation';
 import { FormFields } from '../types/form';
 import { useEffect } from 'react';
@@ -10,9 +10,11 @@ export const useProfileForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {};
+
   useEffect(() => {
     getProfile();
   }, []);
 
-  return { form };
+  return { form, errors: form.formState.errors, onSubmit };
 };
