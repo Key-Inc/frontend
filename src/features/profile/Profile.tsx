@@ -11,7 +11,7 @@ export const Profile = () => {
   return (
     <Form {...form}>
       {blockedValues ? (
-        <form className='flex flex-col max-w-prose gap-4' onSubmit={form.handleSubmit(onSubmit)}>
+        <form className='flex flex-col max-w-prose gap-4 border p-4' onSubmit={form.handleSubmit(onSubmit)}>
           <BlockedValue label='Имя' value={blockedValues?.fullName || ''} />
           <Controller
             control={form.control}
@@ -46,8 +46,9 @@ export const Profile = () => {
               <FormItem>
                 <FormLabel>Дата рождения</FormLabel>
                 <FormControl>
-                  <Input type='date' {...field} />
+                  <Input type='date' {...field} max={new Date().toISOString().substring(0, 10)} />
                 </FormControl>
+                <FormMessage>{errors.birthDate && <span>{errors.birthDate.message}</span>}</FormMessage>
               </FormItem>
             )}
           />

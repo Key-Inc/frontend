@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { AuthPage } from './pages';
 import { RegistrationRequestsPage } from '@/pages/RegistrationRequestsPage/RegistrationRequestsPage';
-import { Profile } from './features/profile';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 
 export const Router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile />,
+        element: <ProfilePage />,
       },
     ],
   },

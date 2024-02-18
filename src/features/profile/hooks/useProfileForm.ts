@@ -29,7 +29,7 @@ export const useProfileForm = () => {
         const { email, phoneNumber, birthDate, ...fixedData } = res.data;
         form.setValue('email', email);
         form.setValue('phoneNumber', phoneNumber || '');
-        form.setValue('birthDate', birthDate || '');
+        form.setValue('birthDate', birthDate?.substring(0, 10) || '');
         setBlockedValues(fixedData);
       })
       .catch((e) => {
