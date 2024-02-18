@@ -1,19 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
     container: {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px',
+        '2xlx': { max: '1400px' },
+        xlx: { max: '1279px' },
+        '2lgx': { max: '1124px' },
+        lgx: { max: '1023px' },
+        mdx: { max: '767px' },
+        smx: { max: '639px' },
+        xsx: { max: '475px' },
+        '2xl': { min: '1400px' },
+        xl: { min: '1280px' },
+        '2lg': { min: '1124px' },
+        lg: { min: '1024px' },
+        md: { min: '768px' },
+        sm: { min: '640px' },
+        xs: { min: '475px' },
       },
     },
     extend: {
