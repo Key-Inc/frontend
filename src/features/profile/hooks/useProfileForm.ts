@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { validationSchema } from '../constants/validation';
-import { FormFields } from '../types/form';
+import { FixedValues, FormFields } from '../types/form';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../utils/getProfile';
 
 export const useProfileForm = () => {
+  const [blockedValues, setBlockedValues] = useState<FixedValues>();
   const form = useForm<FormFields>({
     resolver: zodResolver(validationSchema),
   });
@@ -14,9 +15,13 @@ export const useProfileForm = () => {
 
   useEffect(() => {
     getProfile().then((res) => {
-      form.formState.defaultValues = res.data;
+      const { email, phoneNumber, birthDate, ...fixedData } = res.data;
+      form.setValue('email', email);
+      form.setValue('phoneNumber', phoneNumber || '');
+      form.setValue('birthDate', birthDate || '');
+      setBlockedValues(fixedData);
     });
   }, []);
 
-  return { form, errors: form.formState.errors, onSubmit };
+  return { form, errors: form.formState.errors, onSubmit, blockedValues };
 };

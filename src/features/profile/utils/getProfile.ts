@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios';
 export const getProfile = async () => {
   const token = getCookieByName('token');
   try {
-    const res = await axios.get(PROFILE, {
+    const res = await axios.get<UserDto>(PROFILE, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res;
