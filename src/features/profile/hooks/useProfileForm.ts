@@ -14,13 +14,12 @@ export const useProfileForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    changeProfile(data)
-      .then(() => {
-        toast('Профиль успешно обновлён');
-      })
-      .catch((e) => {
-        toast(String(e));
-      });
+    try {
+      await changeProfile(data);
+      toast('Профиль успешно обновлён');
+    } catch (e) {
+      toast(String(e));
+    }
   };
 
   useEffect(() => {
