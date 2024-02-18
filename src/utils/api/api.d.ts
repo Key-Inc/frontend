@@ -1,3 +1,8 @@
+interface BaseResponse {
+  status: string;
+  message: string;
+}
+
 interface UserDto {
   id: string;
   fullName: string;

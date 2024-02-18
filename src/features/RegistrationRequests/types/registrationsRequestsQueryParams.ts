@@ -1,4 +1,4 @@
-export interface registrationsRequestsQueryParams {
+export interface RegistrationsRequestsQueryParams {
   FullName: string | null;
   Page: string | null;
   Gender: string | null;

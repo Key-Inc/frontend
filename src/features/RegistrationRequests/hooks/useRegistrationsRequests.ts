@@ -1,11 +1,11 @@
-import { ACCOUNT } from '@/lib/constants/api';
+import { CONSIDERATION } from '@/lib/constants/api';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { registrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
+import { RegistrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
 
 export const useRegistrationsRequests = () => {
-  const [values, setValues] = useState<registrationsRequestsQueryParams>({} as registrationsRequestsQueryParams);
+  const [values, setValues] = useState<RegistrationsRequestsQueryParams>({} as RegistrationsRequestsQueryParams);
   const [users, setUsers] = useState<UserDto[]>([]);
   const [params, setParams] = useSearchParams();
 
@@ -34,7 +34,7 @@ export const useRegistrationsRequests = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get<RegistrationRequestPagedListDto>(`${ACCOUNT}/consideration`, {
+        const res = await axios.get<RegistrationRequestPagedListDto>(`${CONSIDERATION}`, {
           params: configParams,
         });
         setUsers(res.data.users);
