@@ -2,7 +2,7 @@ import { CONSIDERATION } from '@/lib/constants/api';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { RegistrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
+import { RegistrationsRequestsQueryParams } from '../types/RegistrationsRequestsQueryParams';
 
 export const useRegistrationsRequests = () => {
   const [values, setValues] = useState<RegistrationsRequestsQueryParams>({} as RegistrationsRequestsQueryParams);
