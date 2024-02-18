@@ -1,10 +1,10 @@
+import * as requests from './mock';
 import { MockServerConfig } from 'mock-config-server';
-import { postAuthLogin } from './mock';
 
 const mockServerConfig: MockServerConfig = {
+  baseUrl: '/api',
   rest: {
-    baseUrl: '/api',
-    configs: [postAuthLogin],
+    configs: Object.values(requests),
   },
   interceptors: {
     request: ({ setDelay }) => setDelay(1000),
