@@ -1,13 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import { Toaster } from 'sonner';
-import { Header } from './components/common/Header/Header';
-
-const TOASTER_DURATION = 5000;
-
+import { Button } from "@/components/ui";
 export const App = () => (
-  <div className='min-h-screen'>
-    <Header />
-    <Outlet />
-    <Toaster duration={TOASTER_DURATION} />
-  </div>
+  <>
+    <Button variant="outline">Button</Button>
+  </>
 );

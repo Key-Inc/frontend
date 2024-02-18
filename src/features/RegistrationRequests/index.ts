@@ -1,1 +1,0 @@
-export { RegistrationRequests } from './RegistrationRequests';
