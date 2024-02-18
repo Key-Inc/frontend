@@ -14,4 +14,8 @@ export const HEADER_LINKS: NavigationLinkInfo[] = [
     text: 'Ключи',
     href: ROUTES.KEYS,
   },
+  {
+    text: 'Профиль',
+    href: ROUTES.PROFILE,
+  },
 ];
