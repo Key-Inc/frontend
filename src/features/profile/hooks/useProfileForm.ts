@@ -5,6 +5,7 @@ import { FixedValues, FormFields } from '../types/form';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../utils/getProfile';
 import { toast } from 'sonner';
+import { changeProfile } from '../utils/changeProfile';
 
 export const useProfileForm = () => {
   const [blockedValues, setBlockedValues] = useState<FixedValues>();
@@ -12,7 +13,15 @@ export const useProfileForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {};
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    changeProfile(data)
+      .then(() => {
+        toast('Профиль успешно обновлён');
+      })
+      .catch((e) => {
+        toast(String(e));
+      });
+  };
 
   useEffect(() => {
     getProfile()

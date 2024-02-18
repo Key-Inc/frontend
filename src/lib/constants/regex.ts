@@ -1,1 +1,1 @@
-export const PHONE_REG = /^\\+7 \\([0-9]{3}\\) [0-9]{3} [0-9]{2} [0-9]{2}$/;
+export const PHONE_REG = /^(\+7|8)[0-9]{10}$/;
