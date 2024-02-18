@@ -1,24 +1,14 @@
 import { Button, Input } from '@/components/ui';
-import { Controller } from 'react-hook-form';
 import { useLoginForm } from './hooks/useLoginForm';
-import {
-  Form,
-  FormControl,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 export const Auth = () => {
   const { form, errors, onSubmit } = useLoginForm();
 
   return (
     <Form {...form}>
-      <form
-        className='flex flex-col max-w-prose gap-8'
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <Controller
+      <form className='flex flex-col max-w-prose gap-8' onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
           control={form.control}
           name='email'
           render={({ field }) => (
@@ -27,14 +17,12 @@ export const Auth = () => {
               <FormControl>
                 <Input type='email' {...field} isError={!!errors.email} />
               </FormControl>
-              <FormMessage className='absolute'>
-                {errors.email && <span>{errors.email.message}</span>}
-              </FormMessage>
+              <FormMessage className='absolute'>{errors.email && <span>{errors.email.message}</span>}</FormMessage>
             </FormItem>
           )}
         />
 
-        <Controller
+        <FormField
           control={form.control}
           name='password'
           render={({ field }) => (
@@ -52,9 +40,7 @@ export const Auth = () => {
         <Button type='submit' className='mt-3'>
           Логин
         </Button>
-        {errors.root && (
-          <span className='text-error -mt-3'>{errors.root.message}</span>
-        )}
+        {errors.root && <span className='text-error -mt-3'>{errors.root.message}</span>}
       </form>
     </Form>
   );

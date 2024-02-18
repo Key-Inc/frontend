@@ -22,18 +22,21 @@ export const useProfileForm = () => {
     }
   };
 
+  const setUserProfile = async () => {
+    try {
+      const res = await getProfile();
+      const { email, phoneNumber, birthDate, ...fixedData } = res.data;
+      form.setValue('email', email);
+      form.setValue('phoneNumber', phoneNumber || '');
+      form.setValue('birthDate', birthDate?.substring(0, 10) || '');
+      setBlockedValues(fixedData);
+    } catch (e) {
+      toast(String(e));
+    }
+  };
+
   useEffect(() => {
-    getProfile()
-      .then((res) => {
-        const { email, phoneNumber, birthDate, ...fixedData } = res.data;
-        form.setValue('email', email);
-        form.setValue('phoneNumber', phoneNumber || '');
-        form.setValue('birthDate', birthDate?.substring(0, 10) || '');
-        setBlockedValues(fixedData);
-      })
-      .catch((e) => {
-        toast.error(String(e));
-      });
+    setUserProfile();
   }, []);
 
   return { form, errors: form.formState.errors, onSubmit, blockedValues };

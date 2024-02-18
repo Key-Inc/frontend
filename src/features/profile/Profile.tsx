@@ -1,6 +1,5 @@
 import { Input, Button } from '@/components/ui';
-import { FormItem, FormLabel, FormControl, FormMessage, Form } from '@/components/ui/form';
-import { Controller } from 'react-hook-form';
+import { FormItem, FormLabel, FormControl, FormMessage, Form, FormField } from '@/components/ui/form';
 import { useProfileForm } from './hooks/useProfileForm';
 import { BlockedValue } from './components/BlockedValue/BlockedValue';
 import { Loader } from '@/components/ui/loader';
@@ -13,7 +12,7 @@ export const Profile = () => {
       {blockedValues ? (
         <form className='flex flex-col max-w-prose gap-4 border p-4' onSubmit={form.handleSubmit(onSubmit)}>
           <BlockedValue label='Имя' value={blockedValues?.fullName || ''} />
-          <Controller
+          <FormField
             control={form.control}
             name='email'
             render={({ field }) => (
@@ -26,7 +25,7 @@ export const Profile = () => {
               </FormItem>
             )}
           />
-          <Controller
+          <FormField
             control={form.control}
             name='password'
             render={({ field }) => (
@@ -39,7 +38,7 @@ export const Profile = () => {
               </FormItem>
             )}
           />
-          <Controller
+          <FormField
             control={form.control}
             name='birthDate'
             render={({ field }) => (
@@ -52,7 +51,7 @@ export const Profile = () => {
               </FormItem>
             )}
           />
-          <Controller
+          <FormField
             control={form.control}
             name='phoneNumber'
             render={({ field }) => (
