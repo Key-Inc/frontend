@@ -23,3 +23,10 @@ interface RegistrationRequestPagedListDto {
   users: UserDto[];
   pagination: PageInfoDto;
 }
+
+interface KeyFullDto {
+  id: string;
+  classroomId: string;
+  keyStatus: 'InDeanOffice' | 'InPossession';
+  userId: string;
+}
