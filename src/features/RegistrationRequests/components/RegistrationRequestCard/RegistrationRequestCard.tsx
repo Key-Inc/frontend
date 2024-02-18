@@ -16,19 +16,20 @@ export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) 
         <CardDescription>{user.phoneNumber}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-col'>
-        <Select onValueChange={(value) => setUserRole(value)} defaultValue={user.userRole}>
+        <Select onValueChange={(value) => setUserRole(value)} defaultValue={'Student'}>
           <SelectTrigger className='w-[150px] h-8'>
             <SelectValue placeholder='Роль' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='Admin'>Админ</SelectItem>
             <SelectItem value='Dean'>Декан</SelectItem>
             <SelectItem value='Teacher'>Преподаватель</SelectItem>
             <SelectItem value='Student'>Студент</SelectItem>
           </SelectContent>
         </Select>
-        <span>{user.gender}</span>
-        <span>{user.email}</span>
+        <div className='flex space-y-2 flex-col mt-3 text-sm'>
+          <span>{user.gender == 'male' ? 'Мужчина' : 'Женщина'}</span>
+          <span>{user.email}</span>
+        </div>
       </CardContent>
       <CardFooter className='flex justify-between'>
         <Button variant='outline' onClick={handleReject}>
