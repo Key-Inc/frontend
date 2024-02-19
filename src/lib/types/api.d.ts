@@ -34,3 +34,9 @@ interface KeyFullDto {
   keyStatus: 'InDeanOffice' | 'InPossession';
   user?: UserLiteDto;
 }
+
+interface SearchUserDto {
+  id: string;
+  fullname: string;
+  userRole: string;
+}

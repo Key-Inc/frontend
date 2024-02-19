@@ -1,10 +1,12 @@
-import { KEYS } from '@/lib/constants/api';
+import { KEYS, USERS } from '@/lib/constants/api';
 import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 export const useKeyCard = (keyId: string) => {
-  const [selectedUser, setSelectedUser] = useState<string>('');
+  const [selectedUser, setSelectedUser] = useState('');
+  const [userQuery, setUserQuery] = useState('');
+  const [users, setUsers] = useState<SearchUserDto[]>([]);
 
   const handleUserSelect = (value: string | undefined) => {
     console.log(value);
@@ -24,5 +26,31 @@ export const useKeyCard = (keyId: string) => {
     }
   };
 
-  return { hadleReturnInStock, handleUserSelect, setSelectedUser, selectedUser };
+  useEffect(() => {
+    const handleUserSearch = async () => {
+      try {
+        const res = await axios.get<SearchUserDto[]>(
+          `${USERS}${userQuery ? `?fullname=${userQuery}` : ''}`,
+          {},
+        );
+        setUsers(res.data);
+      } catch (e) {
+        if (e instanceof AxiosError) {
+          toast.error('Произошла ошибка', {
+            cancel: { label: 'Close' },
+          });
+        }
+      }
+    };
+    handleUserSearch();
+  }, [userQuery]);
+
+  return {
+    hadleReturnInStock,
+    handleUserSelect,
+    setSelectedUser,
+    selectedUser,
+    setUserQuery,
+    users,
+  };
 };

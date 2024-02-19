@@ -6,30 +6,29 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from '@/components/ui/card';
-import { Combobox } from '@/components/ui/combobox';
+} from '@/components/ui';
+import { Combobox } from '@/components/ui';
 import { useKeyCard } from './useKeyCard';
+import { convertUsersToComboboxItems } from '../../helpers/convertUsersToComboboxItems';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;
 }
 
-export interface ComboBoxItemType {
-  value: string;
-  label: string;
-}
+// export interface ComboBoxItemType {
+//   value: string;
+//   label: string;
+// }
 
-const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
+// const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
 
 export const KeyCard = ({ classromKey }: KeyCardProps) => {
-  const { handleUserSelect, hadleReturnInStock, selectedUser } = useKeyCard(
-    classromKey.id,
-  );
-
+  const { handleUserSelect, hadleReturnInStock, selectedUser, users, setUserQuery } =
+    useKeyCard(classromKey.id);
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>
       <CardHeader className='pb-1'>
-        <CardTitle className='text-xl'>Аудитория {classromKey.classroomId}</CardTitle>
+        <CardTitle className='text-xl'>{classromKey.classroomId}</CardTitle>
         {classromKey.user && (
           <CardDescription>{classromKey.user.fullName}</CardDescription>
         )}
@@ -43,8 +42,9 @@ export const KeyCard = ({ classromKey }: KeyCardProps) => {
         {!classromKey.user && (
           <div>
             <Combobox
-              items={comboboxItems}
+              items={convertUsersToComboboxItems(users)}
               onSelect={handleUserSelect}
+              onSearchChange={setUserQuery}
               value={selectedUser}
             />
           </div>
