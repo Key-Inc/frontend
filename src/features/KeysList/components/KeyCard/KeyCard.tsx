@@ -22,7 +22,9 @@ export interface ComboBoxItemType {
 const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
 
 export const KeyCard = ({ classromKey }: KeyCardProps) => {
-  const { handleUserSelect, hadleReturnInStock, selectedUser } = useKeyCard();
+  const { handleUserSelect, hadleReturnInStock, selectedUser } = useKeyCard(
+    classromKey.id,
+  );
 
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>

@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-export const useKeyCard = () => {
+export const useKeyCard = (keyId: string) => {
   const [selectedUser, setSelectedUser] = useState<string>('');
 
   const handleUserSelect = (value: string | undefined) => {
@@ -23,5 +23,6 @@ export const useKeyCard = () => {
       }
     }
   };
+
   return { hadleReturnInStock, handleUserSelect, setSelectedUser, selectedUser };
 };
