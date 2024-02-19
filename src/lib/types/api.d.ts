@@ -23,10 +23,14 @@ interface RegistrationRequestPagedListDto {
   users: UserDto[];
   pagination: PageInfoDto;
 }
+interface UserLiteDto {
+  fullName: string;
+  userRole: 'Student' | 'Teacher' | 'Dean' | 'Admin';
+}
 
 interface KeyFullDto {
   id: string;
   classroomId: string;
   keyStatus: 'InDeanOffice' | 'InPossession';
-  userId: string;
+  user?: UserLiteDto;
 }
