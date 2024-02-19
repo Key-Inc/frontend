@@ -8,7 +8,7 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { Combobox } from '@/components/ui/combobox';
-import { useState } from 'react';
+import { useKeyCard } from './useKeyCard';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;
@@ -22,12 +22,7 @@ export interface ComboBoxItemType {
 const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
 
 export const KeyCard = ({ classromKey }: KeyCardProps) => {
-  const [selectedUser, setSelectedUser] = useState<string>('');
-
-  const handleUserSelect = (value: string | undefined) => {
-    console.log(value);
-    setSelectedUser(value || '');
-  };
+  const { handleUserSelect, hadleReturnInStock, selectedUser } = useKeyCard();
 
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>
@@ -55,7 +50,9 @@ export const KeyCard = ({ classromKey }: KeyCardProps) => {
       </CardContent>
       <CardFooter className='flex justify-between'>
         {!classromKey.user && <Button>Выдать</Button>}
-        {classromKey.user && <Button>Подтвердить возврат</Button>}
+        {classromKey.user && (
+          <Button onClick={hadleReturnInStock}>Подтвердить возврат</Button>
+        )}
       </CardFooter>
     </Card>
   );
