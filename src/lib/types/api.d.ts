@@ -46,6 +46,7 @@ interface UserLiteDto {
 }
 
 interface KeyRequestFullDto {
+  id: string;
   status: RequestStatus;
   startDate: string;
   endDate: string;
