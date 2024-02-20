@@ -34,13 +34,24 @@ enum Role {
   Admin,
 }
 
+interface ClassroomDto {
+  id: string;
+  number: number;
+  building: number;
+}
+
+interface UserLiteDto {
+  fullName: string;
+  userRole: Role;
+}
+
 interface KeyRequestFullDto {
   status: RequestStatus;
   startDate: string;
   endDate: string;
   isRecurring: boolean;
-  classroomId: string;
-  userId: string;
+  classroom: ClassroomDto;
+  user: UserLiteDto;
 }
 
 interface PageInfoDto {
