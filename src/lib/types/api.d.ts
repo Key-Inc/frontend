@@ -11,28 +11,14 @@ interface UserDto {
   gender: string;
   phoneNumber?: string;
   email: string;
-  userRole: string;
+  userRole: Role;
 }
 
-enum RequestStatus {
-  UnderConsideration,
-  Accepted,
-  Rejected,
-}
+type RequestStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
 
-enum Sorting {
-  CreateDesc,
-  CreateAsc,
-  StartDateAsc,
-  StartDateDesc,
-}
+type Sorting = 'CreateDesc' | 'CreateAsc' | 'StartDateAsc' | 'StartDateDesc';
 
-enum Role {
-  Student,
-  Teacher,
-  Dean,
-  Admin,
-}
+type Role = 'Student' | 'Teacher' | 'Dean' | 'Admin';
 
 interface ClassroomDto {
   id: string;

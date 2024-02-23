@@ -14,6 +14,8 @@ export const useKeysRequests = () => {
     setParams(params);
   };
 
+  const getParamsByName = (name: string) => params.get(name) || '';
+
   const nextPage = () => {
     setParamsByName('Page', String(Number(params.get('Page') || '1') + 1));
   };
@@ -60,7 +62,7 @@ export const useKeysRequests = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [params]);
 
-  return { setParamsByName, nextPage, previousPage, requestsList, approve, reject };
+  return { setParamsByName, nextPage, previousPage, requestsList, approve, reject, getParamsByName };
 };
