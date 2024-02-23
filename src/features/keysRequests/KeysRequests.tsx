@@ -1,10 +1,12 @@
 import { Loader } from '@/components/ui';
 import { useKeysRequests } from './hooks/useKeysRequests';
-import { DataTable } from '@/components/common';
-import { COLUMNS } from './constants/columns';
+import { RequestsTable } from './components/RequestsTable';
+import { getColumns } from './constants/columns.tsx';
 
 export const KeysRequests = () => {
-  const { requestsList, nextPage, previousPage, setParamsByName } = useKeysRequests();
+  const { requestsList, nextPage, previousPage, setParamsByName, approve, reject } = useKeysRequests();
 
-  return <div>{requestsList.length ? <DataTable columns={COLUMNS} data={requestsList} /> : <Loader />}</div>;
+  const COLUMNS = getColumns(approve, reject);
+
+  return <div>{requestsList.length ? <RequestsTable columns={COLUMNS} data={requestsList} /> : <Loader />}</div>;
 };

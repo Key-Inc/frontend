@@ -22,6 +22,14 @@ export const useKeysRequests = () => {
     setParamsByName('Page', String(Number(params.get('Page')!) - 1));
   };
 
+  const approve = (index: number) => {
+    console.log(requestsList[index].user);
+  };
+
+  const reject = (index: number) => {
+    console.log(requestsList[index].user);
+  };
+
   useEffect(() => {
     const configParams = {
       MinDate: params.get('MinDate'),
@@ -54,5 +62,5 @@ export const useKeysRequests = () => {
     fetchData();
   }, []);
 
-  return { setParamsByName, nextPage, previousPage, requestsList };
+  return { setParamsByName, nextPage, previousPage, requestsList, approve, reject };
 };
