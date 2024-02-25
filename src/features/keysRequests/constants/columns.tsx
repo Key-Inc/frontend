@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui';
 import { ColumnDef } from '@tanstack/react-table';
+import { convertDate } from '../utils/convertDate';
 
 export const getColumns = (
   approve: (index: number) => void,
@@ -22,11 +23,11 @@ export const getColumns = (
     header: 'Кабинет, корпус',
   },
   {
-    accessorKey: 'startDate',
+    accessorFn: (row) => convertDate(new Date(row.startDate)),
     header: 'Дата начала',
   },
   {
-    accessorKey: 'endDate',
+    accessorFn: (row) => convertDate(new Date(row.endDate)),
     header: 'Дата окончания',
   },
   {

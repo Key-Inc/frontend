@@ -13,9 +13,9 @@ export const OverlappingRequests = ({ isOpen, requests, reject, toggle }: Overla
     <Dialog open={isOpen} onOpenChange={toggle}>
       <DialogContent className='max-w-5xl max-h-screen overflow-auto'>
         <DialogHeader>
-          <DialogTitle>Есть пересекающие заявки:</DialogTitle>
+          <DialogTitle className='text-xl'>Есть пересекающие заявки:</DialogTitle>
         </DialogHeader>
-        <ul className='flex gap-5 flex-wrap justify-center w-full'>
+        <ul className='flex gap-5 flex-wrap justify-evenly w-full'>
           {requests.map((request, index) => (
             <li key={index + 1}>
               <RequestCard keyRequest={request} reject={reject} />

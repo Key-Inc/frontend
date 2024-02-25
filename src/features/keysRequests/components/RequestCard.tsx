@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { convertDate } from '../utils/convertDate';
 
 interface RequestCardProps {
   keyRequest: KeyRequestFullDto;
@@ -20,10 +21,8 @@ export const RequestCard = ({
         <p>
           {classroom.number} ({classroom.building})
         </p>
-        <p>
-          <span>Дата начала: {startDate}</span>
-          <span>Дата окончания: {endDate}</span>
-        </p>
+        <p>Дата начала: {convertDate(new Date(startDate))}</p>
+        <p>Дата окончания: {convertDate(new Date(endDate))}</p>
         <p>Повторяющаяся: {isRecurring ? 'Да' : 'Нет'}</p>
       </CardContent>
       <CardFooter>
