@@ -3,11 +3,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 interface RequestCardProps {
   keyRequest: KeyRequestFullDto;
-  reject: () => void;
+  reject: (id: string) => void;
 }
 
 export const RequestCard = ({
-  keyRequest: { classroom, endDate, isRecurring, startDate, user },
+  keyRequest: { classroom, endDate, isRecurring, startDate, user, id },
   reject,
 }: RequestCardProps) => {
   return (
@@ -27,7 +27,7 @@ export const RequestCard = ({
         <p>Повторяющаяся: {isRecurring ? 'Да' : 'Нет'}</p>
       </CardContent>
       <CardFooter>
-        <Button variant='outline' onClick={reject}>
+        <Button variant='destructive' onClick={() => reject(id)}>
           Отклонить
         </Button>
       </CardFooter>

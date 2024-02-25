@@ -37,8 +37,7 @@ export const useKeysRequests = () => {
         if (e.response?.status === 400) {
           setIsDialogOpen(true);
         }
-      }
-      toast('Произошла ошибка');
+      } else toast('Произошла ошибка');
     }
   };
 
@@ -63,6 +62,7 @@ export const useKeysRequests = () => {
 
     const fetchData = async () => {
       try {
+        setRequestsList([]);
         const res = await axios.get<KeyRequestPagedListDto>(`${REQUEST}`, {
           params: configParams,
         });
@@ -92,5 +92,6 @@ export const useKeysRequests = () => {
     reject,
     getParamsByName,
     isDialogOpen,
+    setIsDialogOpen,
   };
 };

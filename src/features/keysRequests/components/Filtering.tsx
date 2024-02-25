@@ -20,7 +20,7 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
   }, [debouncedFullName, debouncedSize]);
 
   return (
-    <div className='grid grid-cols-2 gap-4 py-5 px-10'>
+    <div className='grid md:grid-cols-2 gap-4 py-5 px-10 grid-cols-1'>
       <div>
         <span>Минимальная дата подачи заявки</span>
         <Input

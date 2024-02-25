@@ -17,6 +17,7 @@ export const KeysRequests = () => {
     getParamsByName,
     previousPage,
     nextPage,
+    setIsDialogOpen,
   } = useKeysRequests();
 
   const COLUMNS = getColumns(
@@ -26,7 +27,12 @@ export const KeysRequests = () => {
 
   return (
     <div className='flex gap-5 flex-col'>
-      <OverlappingRequests isOpen={isDialogOpen} reject={reject} requests={requestsList} />
+      <OverlappingRequests
+        toggle={() => setIsDialogOpen((prev) => !prev)}
+        isOpen={isDialogOpen}
+        reject={reject}
+        requests={requestsList}
+      />
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
       {requestsList.length ? <RequestsTable columns={COLUMNS} data={requestsList} /> : <Loader />}
       <Pagination
