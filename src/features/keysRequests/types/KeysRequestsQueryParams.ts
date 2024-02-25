@@ -1,4 +1,4 @@
-export interface KeysRequestsPagination {
+export interface KeysRequestsQueryParams {
   MinDate: string | null;
   MaxDate: string | null;
   FullName: string | null;

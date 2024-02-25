@@ -1,7 +1,7 @@
 import { Input, Button } from '@/components/ui';
 import { FormItem, FormLabel, FormControl, FormMessage, Form, FormField } from '@/components/ui/form';
 import { useProfileForm } from './hooks/useProfileForm';
-import { BlockedValue } from './components/BlockedValue/BlockedValue';
+import { BlockedValue } from './components/BlockedValue';
 import { Loader } from '@/components/ui/loader';
 
 export const Profile = () => {

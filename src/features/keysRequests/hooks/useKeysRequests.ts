@@ -2,11 +2,11 @@ import { REQUEST } from '@/lib/constants/api';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { KeysRequestsPagination } from '../types/KeysRequestsPagination';
+import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
 
 export const useKeysRequests = () => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
-  const [paramsValues, setParamsValues] = useState<KeysRequestsPagination>({} as KeysRequestsPagination);
+  const [paramsValues, setParamsValues] = useState<KeysRequestsQueryParams>({} as KeysRequestsQueryParams);
   const [params, setParams] = useSearchParams();
 
   const setParamsByName = (name: string, value: string) => {

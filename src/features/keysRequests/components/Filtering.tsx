@@ -1,8 +1,12 @@
 import { Input, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 import { Select } from '@/components/ui';
 import { useDebounce } from '@uidotdev/usehooks';
-import { FilteringProps } from './Filtering.types';
 import { useEffect, useState } from 'react';
+
+interface FilteringProps {
+  setParamsByName: (name: string, value: string) => void;
+  getParamsByName: (name: string) => string;
+}
 
 export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) => {
   const [fullName, setFullName] = useState(getParamsByName('FullName'));
