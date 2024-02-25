@@ -4,3 +4,4 @@ export * from './loader.tsx';
 export * from './card.tsx';
 export * from './table.tsx';
 export * from './select.tsx';
+export * from './dialog.tsx';

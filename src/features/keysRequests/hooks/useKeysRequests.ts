@@ -1,13 +1,16 @@
 import { REQUEST } from '@/lib/constants/api';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
+import { KEY_APPROVE, KEY_REJECT } from '@/lib/constants/api';
+import axios, { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 export const useKeysRequests = () => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
   const [paramsValues, setParamsValues] = useState<KeysRequestsQueryParams>({} as KeysRequestsQueryParams);
   const [params, setParams] = useSearchParams();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const setParamsByName = (name: string, value: string) => {
     params.set(name, value);
@@ -24,12 +27,27 @@ export const useKeysRequests = () => {
     setParamsByName('Page', String(Number(params.get('Page')!) - 1));
   };
 
-  const approve = (index: number) => {
-    console.log(requestsList[index].user);
+  const getRequestIdByIndex = (index: number) => requestsList[index].id;
+
+  const approve = async (id: string) => {
+    try {
+      await axios.put(KEY_APPROVE(id), {});
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response?.status === 400) {
+          setIsDialogOpen(true);
+        }
+      }
+      toast('Произошла ошибка');
+    }
   };
 
-  const reject = (index: number) => {
-    console.log(requestsList[index].user);
+  const reject = async (id: string) => {
+    try {
+      await axios.put(KEY_REJECT(id));
+    } catch (e) {
+      toast('Произошла ошибка');
+    }
   };
 
   useEffect(() => {
@@ -64,5 +82,15 @@ export const useKeysRequests = () => {
     fetchData();
   }, [params]);
 
-  return { setParamsByName, nextPage, previousPage, requestsList, approve, reject, getParamsByName };
+  return {
+    setParamsByName,
+    nextPage,
+    previousPage,
+    requestsList,
+    getRequestIdByIndex,
+    approve,
+    reject,
+    getParamsByName,
+    isDialogOpen,
+  };
 };
