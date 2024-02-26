@@ -3,13 +3,17 @@ import { App } from './App';
 import { AuthPage } from './pages';
 import { RegistrationRequestsPage } from '@/pages/RegistrationRequestsPage/RegistrationRequestsPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
-import { KeysRequests } from './features/keysRequests';
+import { KeysRequestsPage } from './pages/KeysRequestsPage/KeysRequestsPage';
 
 export const Router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '/',
+        element: <KeysRequestsPage />,
+      },
       {
         path: '/auth',
         element: <AuthPage />,
@@ -21,10 +25,6 @@ export const Router = createBrowserRouter([
       {
         path: '/profile',
         element: <ProfilePage />,
-      },
-      {
-        path: '/keysrequests',
-        element: <KeysRequests />,
       },
     ],
   },

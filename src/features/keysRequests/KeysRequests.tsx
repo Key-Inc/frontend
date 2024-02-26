@@ -32,7 +32,7 @@ export const KeysRequests = () => {
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
       {requestsList.length ? <RequestsTable columns={COLUMNS} data={requestsList} /> : <Loader />}
       <Pagination
-        className='justify-center'
+        className='justify-center mt-auto'
         nextPage={nextPage}
         previousPage={previousPage}
         page={getParamsByName('Page') || '1'}
