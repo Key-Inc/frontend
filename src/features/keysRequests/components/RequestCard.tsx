@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { convertDate } from '../utils/convertDate';
+import { translateUserRole } from '@/lib/utils';
 
 interface RequestCardProps {
   keyRequest: KeyRequestFullDto;
@@ -15,7 +16,7 @@ export const RequestCard = ({
     <Card className='min-w-[330px] max-w-[440px] flex-1'>
       <CardHeader>
         <CardTitle className='text-xl'>{user.fullName}</CardTitle>
-        <CardDescription>{user.userRole}</CardDescription>
+        <CardDescription>{translateUserRole(user.userRole)}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-col'>
         <p>

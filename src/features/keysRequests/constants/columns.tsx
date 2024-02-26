@@ -1,13 +1,14 @@
 import { Button } from '@/components/ui';
 import { ColumnDef } from '@tanstack/react-table';
 import { convertDate } from '../utils/convertDate';
+import { translateRequestStatus, translateUserRole } from '@/lib/utils';
 
 export const getColumns = (
   approve: (index: number) => void,
   reject: (index: number) => void,
 ): ColumnDef<KeyRequestFullDto>[] => [
   {
-    accessorKey: 'status',
+    accessorFn: (row) => translateRequestStatus(row.status),
     header: 'Статус заявки',
   },
   {
@@ -15,7 +16,7 @@ export const getColumns = (
     header: 'Человек',
   },
   {
-    accessorKey: `user.userRole`,
+    accessorFn: (row) => translateUserRole(row.user.userRole),
     header: 'Роль человека',
   },
   {

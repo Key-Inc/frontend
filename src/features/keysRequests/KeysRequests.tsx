@@ -4,7 +4,7 @@ import { RequestsTable } from './components/RequestsTable';
 import { getColumns } from './constants/columns.tsx';
 import { Filtering } from './components/Filtering.tsx';
 import { Pagination } from '@/components/common';
-import { OverlappingRequests } from './components/OverlappingRequests.tsx';
+import { OverlappingRequests } from './components/OverlappingRequests/OverlappingRequests.tsx';
 
 export const KeysRequests = () => {
   const {
@@ -18,6 +18,7 @@ export const KeysRequests = () => {
     previousPage,
     nextPage,
     setIsDialogOpen,
+    dialogId,
   } = useKeysRequests();
 
   const COLUMNS = getColumns(
@@ -31,7 +32,7 @@ export const KeysRequests = () => {
         toggle={() => setIsDialogOpen((prev) => !prev)}
         isOpen={isDialogOpen}
         reject={reject}
-        requests={requestsList}
+        id={dialogId}
       />
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
       {requestsList.length ? <RequestsTable columns={COLUMNS} data={requestsList} /> : <Loader />}

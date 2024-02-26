@@ -11,6 +11,7 @@ export const useKeysRequests = () => {
   const [paramsValues, setParamsValues] = useState<KeysRequestsQueryParams>({} as KeysRequestsQueryParams);
   const [params, setParams] = useSearchParams();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogId, setDialogId] = useState('');
 
   const setParamsByName = (name: string, value: string) => {
     params.set(name, value);
@@ -35,6 +36,7 @@ export const useKeysRequests = () => {
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.status === 400) {
+          setDialogId(id);
           setIsDialogOpen(true);
         }
       } else toast('Произошла ошибка');
@@ -92,6 +94,7 @@ export const useKeysRequests = () => {
     reject,
     getParamsByName,
     isDialogOpen,
+    dialogId,
     setIsDialogOpen,
   };
 };
