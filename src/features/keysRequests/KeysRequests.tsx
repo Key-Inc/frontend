@@ -5,13 +5,13 @@ import { getColumns } from './constants/columns.tsx';
 import { Filtering } from './components/Filtering.tsx';
 import { Pagination } from '@/components/common';
 import { OverlappingRequests } from './components/OverlappingRequests/OverlappingRequests.tsx';
+import { reject } from './utils/requestStatusChange.ts';
 
 export const KeysRequests = () => {
   const {
     requestsList,
     setParamsByName,
-    approve,
-    reject,
+    handleApprove,
     isDialogOpen,
     getRequestIdByIndex,
     getParamsByName,
@@ -22,18 +22,13 @@ export const KeysRequests = () => {
   } = useKeysRequests();
 
   const COLUMNS = getColumns(
-    (index) => approve(getRequestIdByIndex(index)),
+    (index) => handleApprove(getRequestIdByIndex(index)),
     (index) => reject(getRequestIdByIndex(index)),
   );
 
   return (
     <div className='flex gap-5 flex-col'>
-      <OverlappingRequests
-        toggle={() => setIsDialogOpen((prev) => !prev)}
-        isOpen={isDialogOpen}
-        reject={reject}
-        id={dialogId}
-      />
+      <OverlappingRequests toggle={() => setIsDialogOpen((prev) => !prev)} isOpen={isDialogOpen} id={dialogId} />
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
       {requestsList.length ? <RequestsTable columns={COLUMNS} data={requestsList} /> : <Loader />}
       <Pagination

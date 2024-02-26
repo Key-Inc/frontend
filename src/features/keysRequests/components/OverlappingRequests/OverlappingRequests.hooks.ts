@@ -2,6 +2,7 @@ import { OVERLAPPING } from '@/lib/constants/api';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { approve } from '@/features/keysRequests/utils/requestStatusChange';
 
 export const useOverlappingRequests = (isOpen: boolean, id: string) => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
@@ -15,9 +16,11 @@ export const useOverlappingRequests = (isOpen: boolean, id: string) => {
     }
   };
 
+  const handleApprove = () => approve(id, true, () => toast('Произошла ошибка'));
+
   useEffect(() => {
     if (isOpen) getRequests();
   }, [isOpen]);
 
-  return { requestsList };
+  return { requestsList, handleApprove };
 };

@@ -2,16 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { convertDate } from '../utils/convertDate';
 import { translateUserRole } from '@/lib/utils';
+import { reject } from '../utils/requestStatusChange';
 
-interface RequestCardProps {
-  keyRequest: KeyRequestFullDto;
-  reject: (id: string) => void;
-}
-
-export const RequestCard = ({
-  keyRequest: { classroom, endDate, isRecurring, startDate, user, id },
-  reject,
-}: RequestCardProps) => {
+export const RequestCard = ({ classroom, endDate, isRecurring, startDate, user, id }: KeyRequestFullDto) => {
   return (
     <Card className='min-w-[330px] max-w-[440px] flex-1'>
       <CardHeader>

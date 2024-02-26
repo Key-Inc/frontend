@@ -2,9 +2,9 @@ import { REQUEST } from '@/lib/constants/api';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
-import { KEY_APPROVE, KEY_REJECT } from '@/lib/constants/api';
 import axios, { AxiosError } from 'axios';
 import { toast } from 'sonner';
+import { approve } from '../utils/requestStatusChange';
 
 export const useKeysRequests = () => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
@@ -30,26 +30,15 @@ export const useKeysRequests = () => {
 
   const getRequestIdByIndex = (index: number) => requestsList[index].id;
 
-  const approve = async (id: string) => {
-    try {
-      await axios.put(KEY_APPROVE(id), {});
-    } catch (e) {
+  const handleApprove = async (id: string) =>
+    approve(id, false, (e) => {
       if (e instanceof AxiosError) {
         if (e.response?.status === 400) {
           setDialogId(id);
           setIsDialogOpen(true);
         }
       } else toast('Произошла ошибка');
-    }
-  };
-
-  const reject = async (id: string) => {
-    try {
-      await axios.put(KEY_REJECT(id));
-    } catch (e) {
-      toast('Произошла ошибка');
-    }
-  };
+    });
 
   useEffect(() => {
     const configParams = {
@@ -90,8 +79,7 @@ export const useKeysRequests = () => {
     previousPage,
     requestsList,
     getRequestIdByIndex,
-    approve,
-    reject,
+    handleApprove,
     getParamsByName,
     isDialogOpen,
     dialogId,

@@ -5,12 +5,11 @@ import { useOverlappingRequests } from './OverlappingRequests.hooks';
 interface OverlappingRequestsProps {
   isOpen: boolean;
   id: string;
-  reject: (id: string) => void;
   toggle: () => void;
 }
 
-export const OverlappingRequests = ({ isOpen, id, reject, toggle }: OverlappingRequestsProps) => {
-  const { requestsList } = useOverlappingRequests(isOpen, id);
+export const OverlappingRequests = ({ isOpen, id, toggle }: OverlappingRequestsProps) => {
+  const { requestsList, handleApprove } = useOverlappingRequests(isOpen, id);
 
   return (
     <Dialog open={isOpen} onOpenChange={toggle}>
@@ -20,17 +19,16 @@ export const OverlappingRequests = ({ isOpen, id, reject, toggle }: OverlappingR
         </DialogHeader>
         {requestsList.length ? (
           <ul className='flex gap-5 flex-wrap justify-evenly w-full'>
-            {requestsList.map((request, index) => (
-              <li key={index + 1}>
-                <RequestCard keyRequest={request} reject={reject} />
+            {requestsList.map((request) => (
+              <li key={request.id}>
+                <RequestCard {...request} />
               </li>
             ))}
           </ul>
         ) : (
           <Loader />
         )}
-
-        <Button className='flex flex-col h-fit'>
+        <Button className='flex flex-col h-fit' onClick={handleApprove}>
           <span className='text-lg'>Всё равно принять</span>
           <span>(Пересекающиеся заявки отклонятся)</span>
         </Button>
