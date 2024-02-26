@@ -1,16 +1,21 @@
 import { KEYS, USERS } from '@/lib/constants/api';
 import axios, { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 export const useKeyCard = (keyId: string) => {
   const [selectedUser, setSelectedUser] = useState('');
-  const [userQuery, setUserQuery] = useState('');
   const [users, setUsers] = useState<SearchUserDto[]>([]);
 
   const handleUserSelect = (value: string | undefined) => {
     console.log(value);
     setSelectedUser(value || '');
+  };
+
+  const handleSearchChange = (value: string) => {
+    if (value.trim() !== '') {
+      handleUserSearch(value);
+    }
   };
 
   const hadleReturnInStock = async () => {
@@ -26,31 +31,43 @@ export const useKeyCard = (keyId: string) => {
     }
   };
 
-  useEffect(() => {
-    const handleUserSearch = async () => {
-      try {
-        const res = await axios.get<SearchUserDto[]>(
-          `${USERS}${userQuery ? `?fullname=${userQuery}` : ''}`,
-          {},
-        );
-        setUsers(res.data);
-      } catch (e) {
-        if (e instanceof AxiosError) {
-          toast.error('Произошла ошибка', {
-            cancel: { label: 'Close' },
-          });
-        }
+  const hadleIssueToUser = async () => {
+    try {
+      const res = await axios.put(`${KEYS}/${keyId}/user/${selectedUser}/issued`, {});
+      return res;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        toast.error('Произошла ошибка', {
+          cancel: { label: 'Close' },
+        });
       }
-    };
-    handleUserSearch();
-  }, [userQuery]);
+    }
+  };
+
+  const handleUserSearch = async (userQuery: string) => {
+    try {
+      const res = await axios.get<SearchUserDto[]>(
+        `${USERS}${userQuery ? `?fullname=${userQuery}` : ''}`,
+        {},
+      );
+      setUsers(res.data);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        toast.error('Произошла ошибка', {
+          cancel: { label: 'Close' },
+        });
+      }
+    }
+  };
 
   return {
     hadleReturnInStock,
     handleUserSelect,
     setSelectedUser,
-    selectedUser,
-    setUserQuery,
     users,
+    handleUserSearch,
+    selectedUser,
+    handleSearchChange,
+    hadleIssueToUser,
   };
 };

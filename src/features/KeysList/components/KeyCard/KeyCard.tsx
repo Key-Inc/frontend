@@ -23,8 +23,16 @@ interface KeyCardProps {
 // const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
 
 export const KeyCard = ({ classromKey }: KeyCardProps) => {
-  const { handleUserSelect, hadleReturnInStock, selectedUser, users, setUserQuery } =
-    useKeyCard(classromKey.id);
+  const {
+    handleUserSelect,
+    hadleReturnInStock,
+    selectedUser,
+    users,
+    handleSearchChange,
+    hadleIssueToUser,
+    // setUserQuery
+  } = useKeyCard(classromKey.id);
+
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>
       <CardHeader className='pb-1'>
@@ -39,19 +47,19 @@ export const KeyCard = ({ classromKey }: KeyCardProps) => {
             {classromKey.keyStatus == 'InDeanOffice' ? 'В деканте' : 'В пользовании'}
           </span>
         </div>
-        {!classromKey.user && (
+        {classromKey.keyStatus == 'InDeanOffice' && (
           <div>
             <Combobox
               items={convertUsersToComboboxItems(users)}
               onSelect={handleUserSelect}
-              onSearchChange={setUserQuery}
+              onSearchChange={handleSearchChange}
               value={selectedUser}
             />
           </div>
         )}
       </CardContent>
       <CardFooter className='flex justify-between'>
-        {!classromKey.user && <Button>Выдать</Button>}
+        {!classromKey.user && <Button onClick={hadleIssueToUser}>Выдать</Button>}
         {classromKey.user && (
           <Button onClick={hadleReturnInStock}>Подтвердить возврат</Button>
         )}
