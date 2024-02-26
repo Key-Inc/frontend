@@ -6,16 +6,18 @@ export const getUsers: RestRequestConfig = {
   routes: [
     {
       entities: {
-        query: { fullname: 'Danill' },
+        query: { fullname: 'Daniil' },
       },
       data: [
         {
-          country: 'Danill Iraq',
-          region: 'Student',
+          fullname: 'Daniil Iraq',
+          id: '123asd1asda231asd2',
+          userRole: 'Student',
         },
         {
-          country: 'Danill Barnaul',
-          region: 'Student',
+          fullname: 'Danill Barnaul',
+          id: '12312312',
+          userRole: 'Student',
         },
       ],
     },
