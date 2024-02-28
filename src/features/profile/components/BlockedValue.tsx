@@ -1,4 +1,7 @@
-import { BlockedValueProps } from './BlockedValue.types';
+interface BlockedValueProps {
+  label: string;
+  value: string;
+}
 
 export const BlockedValue = ({ value, label }: BlockedValueProps) => (
   <div>

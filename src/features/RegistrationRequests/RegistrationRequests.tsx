@@ -1,8 +1,8 @@
-import { Button, Input } from '@/components/ui';
+import { Input } from '@/components/ui';
 import { RegistrationRequestCard } from './components/RegistrationRequestCard/RegistrationRequestCard';
 import { useRegistrationsRequests } from './hooks/useRegistrationsRequests';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { Pagination } from '@/components/common';
 
 export const RegistrationRequests = () => {
   const { users, setParamsByName, params, nextPage, previousPage } = useRegistrationsRequests();
@@ -30,14 +30,12 @@ export const RegistrationRequests = () => {
         ))}
       </div>
 
-      <div className='gap-3 flex pt-3 justify-end'>
-        <Button variant='outline' size='sm' disabled={false} className='border-none' onClick={previousPage}>
-          <ChevronLeftIcon className='h-6 w-6 stroke-2 font-normal' />
-        </Button>
-        <Button variant='outline' size='sm' disabled={false} className='border-none' onClick={nextPage}>
-          <ChevronRightIcon className='h-6 w-6 stroke-2 font-normal' />
-        </Button>
-      </div>
+      <Pagination
+        className='justify-end'
+        nextPage={nextPage}
+        previousPage={previousPage}
+        page={params.get('Page') || ''}
+      />
     </div>
   );
 };

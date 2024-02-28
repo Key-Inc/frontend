@@ -8,3 +8,8 @@ export * from './form.tsx';
 export * from './popover.tsx';
 export * from './scroll-area.tsx';
 export * from './select';
+export * from './loader.tsx';
+export * from './card.tsx';
+export * from './table.tsx';
+export * from './select.tsx';
+export * from './dialog.tsx';
