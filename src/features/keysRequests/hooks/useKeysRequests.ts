@@ -2,13 +2,15 @@ import { REQUEST } from '@/lib/constants/api';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
-import axios, { AxiosError } from 'axios';
-import { toast } from 'sonner';
+import { AxiosError } from 'axios';
 import { approve } from '../utils/requestStatusChange';
+import { api } from '@/api/api';
 
 export const useKeysRequests = () => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
-  const [paramsValues, setParamsValues] = useState<KeysRequestsQueryParams>({} as KeysRequestsQueryParams);
+  const [paramsValues, setParamsValues] = useState<KeysRequestsQueryParams>(
+    {} as KeysRequestsQueryParams,
+  );
   const [params, setParams] = useSearchParams();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogId, setDialogId] = useState('');
@@ -37,10 +39,12 @@ export const useKeysRequests = () => {
           setDialogId(id);
           setIsDialogOpen(true);
         }
-      } else toast('Произошла ошибка');
+      }
     });
 
   useEffect(() => {
+    setParamsByName('Size', '10');
+
     const configParams = {
       MinDate: params.get('MinDate'),
       MaxDate: params.get('MaxDate'),
@@ -54,10 +58,10 @@ export const useKeysRequests = () => {
     const fetchData = async () => {
       try {
         setRequestsList([]);
-        const res = await axios.get<KeyRequestPagedListDto>(`${REQUEST}`, {
+        const res = await api.get<KeyRequestPagedListDto>(`${REQUEST}`, {
           params: configParams,
         });
-        setRequestsList(res.data.requests);
+        setRequestsList(res.data.items);
         setParamsValues({ ...configParams });
       } catch (error) {
         if (paramsValues.FullName) params.set('FullName', paramsValues.FullName);

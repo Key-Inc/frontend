@@ -20,15 +20,16 @@ export const getColumns = (
     header: 'Роль человека',
   },
   {
-    accessorFn: (row) => `${row.classroom.number} (${row.classroom.building})`,
+    // accessorFn: (row) => `${row.classroom.number} (${row.classroom.building})`,
+    accessorFn: (row) => `${row.classroomId})`,
     header: 'Кабинет, корпус',
   },
   {
-    accessorFn: (row) => convertDate(new Date(row.startDate)),
+    accessorFn: (row) => convertDate(new Date(Date.parse(row.startDate.slice(0, -1)))),
     header: 'Дата начала',
   },
   {
-    accessorFn: (row) => convertDate(new Date(row.endDate)),
+    accessorFn: (row) => convertDate(new Date(Date.parse(row.endDate.slice(0, -1)))),
     header: 'Дата окончания',
   },
   {
@@ -37,7 +38,9 @@ export const getColumns = (
   },
   {
     header: 'Подтвердить заявку',
-    cell: (props) => <Button onClick={() => approve(Number(props.row.id))}>Подтвердить</Button>,
+    cell: (props) => (
+      <Button onClick={() => approve(Number(props.row.id))}>Подтвердить</Button>
+    ),
   },
   {
     header: 'Отклонить заявку',

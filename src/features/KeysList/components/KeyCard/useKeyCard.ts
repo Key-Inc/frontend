@@ -1,7 +1,6 @@
+import { api } from '@/api/api';
 import { KEYS, USERS } from '@/lib/constants/api';
-import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
 export const useKeyCard = (keyId: string) => {
   const [selectedUser, setSelectedUser] = useState('');
@@ -19,45 +18,21 @@ export const useKeyCard = (keyId: string) => {
   };
 
   const hadleReturnInStock = async () => {
-    try {
-      const res = await axios.put(`${KEYS}/${keyId}/instock`, {});
-      return res;
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error('Произошла ошибка', {
-          cancel: { label: 'Close' },
-        });
-      }
-    }
+    const res = await api.put(`${KEYS}/${keyId}/instock`, {});
+    return res;
   };
 
   const hadleIssueToUser = async () => {
-    try {
-      const res = await axios.put(`${KEYS}/${keyId}/user/${selectedUser}/issued`, {});
-      return res;
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error('Произошла ошибка', {
-          cancel: { label: 'Close' },
-        });
-      }
-    }
+    const res = await api.put(`${KEYS}/${keyId}/user/${selectedUser}/issued`, {});
+    return res;
   };
 
   const handleUserSearch = async (userQuery: string) => {
-    try {
-      const res = await axios.get<SearchUserDto[]>(
-        `${USERS}${userQuery ? `?fullname=${userQuery}` : ''}`,
-        {},
-      );
-      setUsers(res.data);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error('Произошла ошибка', {
-          cancel: { label: 'Close' },
-        });
-      }
-    }
+    const res = await api.get<SearchUserDto[]>(
+      `${USERS}${userQuery ? `?fullname=${userQuery}` : ''}`,
+      {},
+    );
+    setUsers(res.data);
   };
 
   return {

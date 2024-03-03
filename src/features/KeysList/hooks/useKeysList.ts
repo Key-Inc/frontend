@@ -1,7 +1,6 @@
+import { api } from '@/api/api';
 import { KEYS } from '@/lib/constants/api';
-import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import { toast } from 'sonner';
 
 export const useKeysList = () => {
   const [keys, setKeys] = useState<KeyFullDto[]>([]);
@@ -9,16 +8,11 @@ export const useKeysList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await axios.get<KeyFullDto[]>(`${KEYS}${keyStatus ? `?keyStatus=${keyStatus}` : ''}`, {});
-        setKeys(res.data);
-      } catch (e) {
-        if (e instanceof AxiosError) {
-          toast.error('Произошла ошибка', {
-            cancel: { label: 'Close' },
-          });
-        }
-      }
+      const res = await api.get<KeyFullDto[]>(
+        `${KEYS}${keyStatus ? `?keyStatus=${keyStatus}` : ''}`,
+        {},
+      );
+      setKeys(res.data);
     };
     fetchData();
   }, [keyStatus]);

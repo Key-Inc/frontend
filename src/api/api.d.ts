@@ -36,8 +36,10 @@ interface KeyRequestFullDto {
   startDate: string;
   endDate: string;
   isRecurring: boolean;
-  classroom: ClassroomDto;
+  // classroom: ClassroomDto;
+  classroomId: string;
   user: UserLiteDto;
+  endDateOfRecurrence: string;
 }
 
 interface PageInfoDto {
@@ -47,7 +49,7 @@ interface PageInfoDto {
 }
 
 interface RegistrationRequestPagedListDto {
-  users: UserDto[];
+  items: UserDto[];
   pagination: PageInfoDto;
 }
 interface UserLiteDto {
@@ -69,6 +71,6 @@ interface SearchUserDto {
 }
 
 interface KeyRequestPagedListDto {
-  requests: KeyRequestFullDto[];
+  items: KeyRequestFullDto[];
   pagination: PageInfoDto;
 }

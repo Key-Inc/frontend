@@ -1,4 +1,4 @@
-export const ROOT = 'http://localhost:31299/api';
+export const ROOT = 'http://46.226.160.59:8080/api';
 export const ACCOUNT = `${ROOT}/account`;
 export const KEYS = `${ROOT}/key`;
 export const USERS = `${ROOT}/user`;

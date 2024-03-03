@@ -1,11 +1,13 @@
 import { CONSIDERATION } from '@/lib/constants/api';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { RegistrationsRequestsQueryParams } from '../types/RegistrationsRequestsQueryParams';
+import { RegistrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
+import { api } from '@/api/api';
 
 export const useRegistrationsRequests = () => {
-  const [values, setValues] = useState<RegistrationsRequestsQueryParams>({} as RegistrationsRequestsQueryParams);
+  const [values, setValues] = useState<RegistrationsRequestsQueryParams>(
+    {} as RegistrationsRequestsQueryParams,
+  );
   const [users, setUsers] = useState<UserDto[]>([]);
   const [params, setParams] = useSearchParams();
 
@@ -34,10 +36,10 @@ export const useRegistrationsRequests = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get<RegistrationRequestPagedListDto>(`${CONSIDERATION}`, {
+        const res = await api.get<RegistrationRequestPagedListDto>(`${CONSIDERATION}`, {
           params: configParams,
         });
-        setUsers(res.data.users);
+        setUsers(res.data.items);
         setValues({ ...configParams });
       } catch (error) {
         if (values.FullName) params.set('FullName', values.FullName);
