@@ -1,10 +1,9 @@
-import { REQUEST } from '@/lib/constants/api';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
 import { AxiosError } from 'axios';
-import { approve } from '../utils/requestStatusChange';
-import { api } from '@/api/api';
+import { getKeysRequests } from '@/shared/utils';
+import { putKeyApprove } from '@/shared/utils';
 
 export const useKeysRequests = () => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
@@ -32,15 +31,18 @@ export const useKeysRequests = () => {
 
   const getRequestIdByIndex = (index: number) => requestsList[index].id;
 
-  const handleApprove = async (id: string) =>
-    approve(id, false, (e) => {
+  const handleApprove = async (id: string) => {
+    try {
+      await putKeyApprove(id, false);
+    } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.status === 400) {
           setDialogId(id);
           setIsDialogOpen(true);
         }
       }
-    });
+    }
+  };
 
   useEffect(() => {
     setParamsByName('Size', '10');
@@ -58,7 +60,7 @@ export const useKeysRequests = () => {
     const fetchData = async () => {
       try {
         setRequestsList([]);
-        const res = await api.get<KeyRequestPagedListDto>(`${REQUEST}`, {
+        const res = await getKeysRequests({
           params: configParams,
         });
         setRequestsList(res.data.items);

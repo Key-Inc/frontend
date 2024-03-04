@@ -1,8 +1,7 @@
-import { CONSIDERATION } from '@/lib/constants/api';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { RegistrationsRequestsQueryParams } from '../types/registrationsRequestsQueryParams';
-import { api } from '@/api/api';
+import { getRegistrationRequests } from '@/shared/utils';
 
 export const useRegistrationsRequests = () => {
   const [values, setValues] = useState<RegistrationsRequestsQueryParams>(
@@ -36,9 +35,7 @@ export const useRegistrationsRequests = () => {
 
     const fetchData = async () => {
       try {
-        const res = await api.get<RegistrationRequestPagedListDto>(`${CONSIDERATION}`, {
-          params: configParams,
-        });
+        const res = await getRegistrationRequests({ params: configParams });
         setUsers(res.data.items);
         setValues({ ...configParams });
       } catch (error) {

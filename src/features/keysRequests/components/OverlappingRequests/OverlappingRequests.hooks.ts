@@ -1,8 +1,8 @@
-import { OVERLAPPING } from '@/lib/constants/api';
+import { OVERLAPPING } from '@/shared/constants/api';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { approve } from '@/features/keysRequests/utils/requestStatusChange';
-import { api } from '@/api/api';
+import { api } from '@/shared/utils/api/api';
+import { putKeyApprove } from '@/shared/utils';
 
 export const useOverlappingRequests = (isOpen: boolean, id: string) => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
@@ -16,7 +16,7 @@ export const useOverlappingRequests = (isOpen: boolean, id: string) => {
     }
   };
 
-  const handleApprove = () => approve(id, true, () => toast('Произошла ошибка'));
+  const handleApprove = () => putKeyApprove(id, true);
 
   useEffect(() => {
     if (isOpen) getRequests();

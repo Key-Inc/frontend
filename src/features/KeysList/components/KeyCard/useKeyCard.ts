@@ -1,5 +1,5 @@
-import { api } from '@/api/api';
-import { KEYS, USERS } from '@/lib/constants/api';
+import { api } from '@/shared/utils/api/api';
+import { KEYS, USERS } from '@/shared/constants/api';
 import { useState } from 'react';
 
 export const useKeyCard = (keyId: string) => {

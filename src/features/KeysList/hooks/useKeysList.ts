@@ -1,6 +1,5 @@
-import { api } from '@/api/api';
-import { KEYS } from '@/lib/constants/api';
 import { useEffect, useState } from 'react';
+import { getKeysList } from '@/shared/utils';
 
 export const useKeysList = () => {
   const [keys, setKeys] = useState<KeyFullDto[]>([]);
@@ -8,10 +7,7 @@ export const useKeysList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await api.get<KeyFullDto[]>(
-        `${KEYS}${keyStatus ? `?keyStatus=${keyStatus}` : ''}`,
-        {},
-      );
+      const res = await getKeysList({ params: { keyStatus } });
       setKeys(res.data);
     };
     fetchData();

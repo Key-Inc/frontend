@@ -1,19 +1,19 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormFields } from '../types/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { validationSchema } from '../constants/validation';
-import { loginRequest } from '../utils/loginRequest';
+
 import { useNavigate } from 'react-router-dom';
+import { postLogin } from '@/shared/utils';
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
-  const form = useForm<FormFields>({
+  const form = useForm<LoginCredintialsDto>({
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<LoginCredintialsDto> = async (data) => {
     try {
-      const res = await loginRequest(data);
+      const res = await postLogin(data);
       document.cookie = `token=${res.data.token}`;
       navigate('/');
     } catch (e) {
