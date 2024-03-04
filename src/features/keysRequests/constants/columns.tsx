@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui';
 import { ColumnDef } from '@tanstack/react-table';
 import { convertDate } from '../utils/convertDate';
-import { translateRequestStatus, translateUserRole } from '@/lib/utils';
+import { translateRequestStatus, translateUserRole } from '@/shared/utils';
 
 export const getColumns = (
   approve: (index: number) => void,

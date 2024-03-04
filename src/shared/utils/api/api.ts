@@ -1,5 +1,5 @@
-import { getCookieByName } from '@/lib';
-import { ROOT } from '@/lib/constants/api';
+import { getCookieByName } from '@/shared/utils';
+import { ROOT } from '@/shared/constants/api';
 import axios from 'axios';
 import { toast } from 'sonner';
 
@@ -19,7 +19,7 @@ api.interceptors.response.use(
     }
     if (error.response.status === 401) {
       localStorage.clear();
-      window.location.href = '/login';
+      if (!window.location.href.includes('auth')) window.location.href = '/auth';
     }
     toast.error(`Произошла ошибка:${error.response.data.title}`, {
       cancel: { label: 'Close' },

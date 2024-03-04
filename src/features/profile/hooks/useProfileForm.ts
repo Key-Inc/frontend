@@ -1,21 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { validationSchema } from '../constants/validation';
-import { FixedValues, FormFields } from '../types/form';
+import { FixedValues } from '../types/form';
 import { useEffect, useState } from 'react';
-import { getProfile } from '../utils/getProfile';
 import { toast } from 'sonner';
-import { changeProfile } from '../utils/changeProfile';
+import { putChangeProfile } from '@/shared/utils/api/requests/user/putChangeProfile';
+import { getProfile } from '@/shared/utils';
 
 export const useProfileForm = () => {
   const [blockedValues, setBlockedValues] = useState<FixedValues>();
-  const form = useForm<FormFields>({
+  const form = useForm<UserEditDto>({
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<UserEditDto> = async (data) => {
     try {
-      await changeProfile(data);
+      await putChangeProfile(data);
       toast('Профиль успешно обновлён');
     } catch (e) {
       toast(String(e));

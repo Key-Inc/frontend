@@ -74,3 +74,15 @@ interface KeyRequestPagedListDto {
   items: KeyRequestFullDto[];
   pagination: PageInfoDto;
 }
+
+interface LoginCredintialsDto {
+  email: string;
+  password: string;
+}
+
+interface UserEditDto {
+  birthDate?: string;
+  phoneNumber?: string;
+  email?: string;
+  password?: string;
+}

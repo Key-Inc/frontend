@@ -1,4 +1,4 @@
-import { PHONE_REG } from '@/lib/constants/regex';
+import { PHONE_REG } from '@/shared/constants/regex';
 import { z } from 'zod';
 
 export const validationSchema = z.object({
