@@ -7,7 +7,6 @@ export const useKeyCard = (keyId: string) => {
   const [users, setUsers] = useState<UserFullDto[]>([]);
 
   const handleUserSelect = (value: string | undefined) => {
-    console.log(value);
     setSelectedUser(value || '');
   };
 
@@ -41,7 +40,6 @@ export const useKeyCard = (keyId: string) => {
     setSelectedUser,
     users,
     handleUserSearch,
-    selectedUser,
     handleSearchChange,
     hadleIssueToUser,
   };
