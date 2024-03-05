@@ -1,13 +1,30 @@
 import { Button, Input } from '@/components/ui';
 import { useLoginForm } from './hooks/useLoginForm';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { ForbiddenDialog } from './components/ForbiddenDialog';
 
 export const Auth = () => {
-  const { form, errors, onSubmit } = useLoginForm();
+  const { form, errors, onSubmit, isForbidden, setIsForbidden, forbiddenCause } =
+    useLoginForm();
 
   return (
     <Form {...form}>
-      <form className='flex flex-col max-w-prose gap-8' onSubmit={form.handleSubmit(onSubmit)}>
+      <ForbiddenDialog
+        isOpen={isForbidden}
+        cause={forbiddenCause}
+        toggle={() => setIsForbidden((prev) => !prev)}
+      />
+      <form
+        className='flex flex-col max-w-prose gap-8'
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <FormField
           control={form.control}
           name='email'
@@ -17,7 +34,9 @@ export const Auth = () => {
               <FormControl>
                 <Input type='email' {...field} isError={!!errors.email} />
               </FormControl>
-              <FormMessage className='absolute'>{errors.email && <span>{errors.email.message}</span>}</FormMessage>
+              <FormMessage className='absolute'>
+                {errors.email && <span>{errors.email.message}</span>}
+              </FormMessage>
             </FormItem>
           )}
         />

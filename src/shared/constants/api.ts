@@ -2,6 +2,7 @@ export const ROOT = 'http://46.226.160.59:8080/api';
 export const ACCOUNT = `${ROOT}/account`;
 export const ACCOUNT_APPROVE = (id: string) => `${ACCOUNT}/${id}/approve`;
 export const ACCOUNT_REJECT = (id: string) => `${ACCOUNT}/${id}/reject`;
+export const REGISTRATION_STATUS = `${ACCOUNT}/registration-status`;
 export const KEYS = `${ROOT}/key`;
 export const USERS = `${ROOT}/user`;
 export const CONSIDERATION = `${ACCOUNT}/consideration`;

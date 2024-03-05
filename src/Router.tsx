@@ -8,16 +8,16 @@ import { KeysRequestsPage } from './pages/KeysRequestsPage/KeysRequestsPage';
 
 export const Router = createBrowserRouter([
   {
+    path: '/auth',
+    element: <AuthPage />,
+  },
+  {
     path: '/',
     element: <App />,
     children: [
       {
         path: '/',
         element: <KeysRequestsPage />,
-      },
-      {
-        path: '/auth',
-        element: <AuthPage />,
       },
       {
         path: '/registrationrequests',

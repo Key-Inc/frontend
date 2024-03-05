@@ -1,4 +1,4 @@
-export const translateRequestStatus = (status: RequestStatus) => {
+export const translateRequestStatus = (status: RegistrationStatus) => {
   switch (status) {
     case 'Accepted':
       return 'Принята';

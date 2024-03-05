@@ -4,3 +4,4 @@ export * from './putChangeProfile';
 export * from './getRegistrationRequests';
 export * from './putUserApprove';
 export * from './putUserReject';
+export * from './getRegistrationStatus';
