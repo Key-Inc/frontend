@@ -10,6 +10,7 @@ import {
 import { Combobox } from '@/components/ui';
 import { useKeyCard } from './useKeyCard';
 import { convertUsersToComboboxItems } from '../../helpers/convertUsersToComboboxItems';
+import React from 'react';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;

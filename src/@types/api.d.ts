@@ -64,10 +64,24 @@ interface KeyFullDto {
   user?: UserLiteDto;
 }
 
-interface SearchUserDto {
+interface UserFullDto {
   id: string;
-  fullname: string;
+  fullName: string;
   userRole: string;
+  bithdate: string; //Тут исправить формат, если нужно это будет где-то
+  email: string;
+  gender: string;
+}
+
+interface PageInfoDto {
+  size: number;
+  current: number;
+  count: number;
+}
+
+interface UserFullDtoPagedListDto {
+  items: UserFullDto[];
+  pagination: PageInfoDto;
 }
 
 interface KeyRequestPagedListDto {
