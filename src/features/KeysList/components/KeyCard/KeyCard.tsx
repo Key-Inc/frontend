@@ -7,31 +7,35 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui';
-import { Combobox } from '@/components/ui';
+
 import { useKeyCard } from './useKeyCard';
-import { convertUsersToComboboxItems } from '../../helpers/convertUsersToComboboxItems';
+import * as React from 'react';
+import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/shared/utils';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;
 }
 
-// export interface ComboBoxItemType {
-//   value: string;
-//   label: string;
-// }
-
-// const comboboxItems: ComboBoxItemType[] = [{ value: 'Ivanov', label: 'Ivanov' }];
-
 export const KeyCard = ({ classromKey }: KeyCardProps) => {
   const {
     handleUserSelect,
     hadleReturnInStock,
-    selectedUser,
     users,
     handleSearchChange,
     hadleIssueToUser,
-    // setUserQuery
   } = useKeyCard(classromKey.id);
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState<UserFullDto | null>(null);
 
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>
@@ -49,12 +53,50 @@ export const KeyCard = ({ classromKey }: KeyCardProps) => {
         </div>
         {classromKey.keyStatus == 'InDeanOffice' && (
           <div>
-            <Combobox
-              items={convertUsersToComboboxItems(users)}
-              onSelect={handleUserSelect}
-              onSearchChange={handleSearchChange}
-              value={selectedUser}
-            />
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='outline'
+                  role='combobox'
+                  aria-expanded={open}
+                  className='w-[200px] justify-between'
+                >
+                  {value ? value.fullName : 'Выберите студента...'}
+                  <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-[200px] p-0'>
+                <Command>
+                  <CommandInput
+                    placeholder='Поиск студента...'
+                    className='h-9'
+                    onValueChange={(e) => handleSearchChange(e)}
+                  />
+                  <CommandEmpty>Студент не найден.</CommandEmpty>
+                  <CommandGroup>
+                    {users.map((user) => (
+                      <CommandItem
+                        key={user.id}
+                        value={user.fullName}
+                        onSelect={() => {
+                          setValue(user);
+                          handleUserSelect(user.id);
+                          setOpen(false);
+                        }}
+                      >
+                        {user.fullName}
+                        <CheckIcon
+                          className={cn(
+                            'ml-auto h-4 w-4',
+                            value && value.id === user.id ? 'opacity-100' : 'opacity-0',
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
+            </Popover>
           </div>
         )}
       </CardContent>
