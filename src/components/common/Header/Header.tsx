@@ -12,8 +12,10 @@ export const Header = () => {
   return (
     <header className='flex md:px-10 py-4 border-b-2 px-4 justify-between md:justify-normal'>
       <div className='flex font-bold items-center mr-6'>
-        <Logo />
-        Key Inc.
+        <Link to='/' className='flex'>
+          <Logo />
+          Key Inc.
+        </Link>
       </div>
 
       <div className='flex justify-between flex-auto'>
