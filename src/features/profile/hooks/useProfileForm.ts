@@ -27,8 +27,8 @@ export const useProfileForm = () => {
       const res = await getProfile();
       const { email, phoneNumber, birthDate, ...fixedData } = res.data;
       form.setValue('email', email);
-      form.setValue('phoneNumber', phoneNumber || '');
-      form.setValue('birthDate', birthDate?.substring(0, 10) || '');
+      form.setValue('phoneNumber', phoneNumber || undefined);
+      form.setValue('birthDate', birthDate?.substring(0, 10) || undefined);
       setBlockedValues(fixedData);
     } catch (e) {
       toast(String(e));

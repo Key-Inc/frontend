@@ -10,7 +10,7 @@ import {
 import { useProfileForm } from './hooks/useProfileForm';
 import { BlockedValue } from './components/BlockedValue';
 import { Loader } from '@/components/ui/loader';
-import { translateGender } from '@/shared/utils';
+import { translateGender, translateUserRole } from '@/shared/utils';
 
 export const Profile = () => {
   const { form, errors, onSubmit, blockedValues } = useProfileForm();
@@ -91,7 +91,10 @@ export const Profile = () => {
             label='Пол'
             value={translateGender(blockedValues?.gender) || ''}
           />
-          <BlockedValue label='Роль' value={blockedValues?.userRole || ''} />
+          <BlockedValue
+            label='Роль'
+            value={translateUserRole(blockedValues?.userRole) || ''}
+          />
           <Button type='submit' className='mt-3'>
             Изменить данные
           </Button>
