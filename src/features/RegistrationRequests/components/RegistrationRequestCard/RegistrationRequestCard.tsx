@@ -26,7 +26,7 @@ export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) 
   );
 
   return (
-    <Card className='min-w-[330px] max-w-[440px] flex-1'>
+    <Card className='min-w-[330px] md:max-w-[400px] flex-1'>
       <CardHeader>
         <CardTitle className='text-xl'>{user.fullName}</CardTitle>
         <CardDescription>{user.phoneNumber}</CardDescription>
