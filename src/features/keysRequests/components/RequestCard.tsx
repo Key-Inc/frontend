@@ -14,10 +14,10 @@ import { putKeyReject } from '@/shared/utils';
 export const RequestCard = ({
   classroomId,
   endDate,
-  isRecurring,
   startDate,
   user,
   id,
+  endDateOfRecurrence,
 }: KeyRequestFullDto) => {
   return (
     <Card className='min-w-[330px] max-w-[440px] flex-1'>
@@ -32,7 +32,9 @@ export const RequestCard = ({
         </p>
         <p>Дата начала: {convertDate(new Date(startDate))}</p>
         <p>Дата окончания: {convertDate(new Date(endDate))}</p>
-        <p>Повторяющаяся: {isRecurring ? 'Да' : 'Нет'}</p>
+        <p>
+          Повторяющаяся: {endDateOfRecurrence ? `Да, до ${endDateOfRecurrence}` : 'Нет'}
+        </p>
       </CardContent>
       <CardFooter>
         <Button variant='destructive' onClick={() => putKeyReject(id)}>

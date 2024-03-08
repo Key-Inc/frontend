@@ -47,9 +47,12 @@ export const useKeysRequests = () => {
   useEffect(() => {
     setParamsByName('Size', '10');
 
+    const minDate = params.get('MinDate');
+    const maxDate = params.get('MaxDate');
+
     const configParams = {
-      MinDate: params.get('MinDate'),
-      MaxDate: params.get('MaxDate'),
+      MinDate: minDate ? new Date(minDate).toISOString() : null,
+      MaxDate: maxDate ? new Date(maxDate).toISOString() : null,
       FullName: params.get('FullName'),
       Role: params.get('Role'),
       Sorting: params.get('Sorting'),

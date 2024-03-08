@@ -12,12 +12,6 @@ export const convertToLocaleDate = (value: string) => {
   return new Date(value.replace('Z', ''));
 };
 
-export const convertTimeZoneToUTC = (value: string) => {
-  const localDate = new Date(value);
-  const utcString = localDate.toUTCString();
-  return new Date(utcString).toISOString();
-};
-
 const addUnnecessaryZero = (value: number) => {
   return value < 10 ? `0${value}` : value;
 };

@@ -8,7 +8,6 @@ import {
 import { Select } from '@/components/ui';
 import { useDebounce } from '@uidotdev/usehooks';
 import { useEffect, useState } from 'react';
-import { convertTimeZoneToUTC } from '../utils/convertDate';
 
 interface FilteringProps {
   setParamsByName: (name: string, value: string) => void;
@@ -33,9 +32,7 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
         <Input
           type='datetime-local'
           value={getParamsByName('MinDate')}
-          onChange={(e) =>
-            setParamsByName('MinDate', convertTimeZoneToUTC(e.currentTarget.value))
-          }
+          onChange={(e) => setParamsByName('MinDate', e.currentTarget.value)}
         />
       </div>
       <div>
