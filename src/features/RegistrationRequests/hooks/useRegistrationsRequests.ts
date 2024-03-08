@@ -26,9 +26,7 @@ export const useRegistrationsRequests = () => {
   useEffect(() => {
     const configParams = {
       Gender: params.get('Gender'),
-      FullName: params.get('FullName'),
-      MinAge: params.get('MinAge'),
-      MaxAge: params.get('MaxAge'),
+      NameQuery: params.get('NameQuery'),
       Sorting: params.get('Sorting'),
       Page: params.get('Page'),
     };
@@ -39,11 +37,8 @@ export const useRegistrationsRequests = () => {
         setUsers(res.data.items);
         setValues({ ...configParams });
       } catch (error) {
-        if (values.FullName) params.set('FullName', values.FullName);
+        if (values.NameQuery) params.set('NameQuery', values.NameQuery);
         if (values.Page) params.set('Page', values.Page);
-        if (values.Gender) params.set('Gender', values.Gender);
-        if (values.MinAge) params.set('MinAge', values.MinAge);
-        if (values.MaxAge) params.set('MaxAge', values.MaxAge);
         if (values.Sorting) params.set('Sorting', values.Sorting);
         setParams(params);
         console.error(error);

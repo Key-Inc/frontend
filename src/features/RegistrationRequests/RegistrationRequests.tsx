@@ -25,16 +25,14 @@ export const RegistrationRequests = () => {
             <SelectValue placeholder='Сортировка' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='CreateAsc'>По возрастанию времени создания</SelectItem>
-            <SelectItem value='CreateDesc'>По убыванию времени создания</SelectItem>
-            <SelectItem value='AgeAsc'>Сначала моложе</SelectItem>
-            <SelectItem value='AgeDesc'>Сначала старше</SelectItem>
+            <SelectItem value='CreateAsc'>Сначала новые</SelectItem>
+            <SelectItem value='CreateDesc'>Сначала старые</SelectItem>
           </SelectContent>
         </Select>
         <Input
           placeholder='Имя'
           className='w-48'
-          onChange={(e) => setParamsByName('FullName', e.target.value)}
+          onChange={(e) => setParamsByName('NameQuery', e.target.value)}
         />
       </div>
 
