@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { validationSchema } from '../constants/validation';
+import { ProfileSchema } from '../constants/ProfileSchema';
 import { FixedValues } from '../types/form';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -10,7 +10,7 @@ import { getProfile } from '@/shared/utils';
 export const useProfileForm = () => {
   const [blockedValues, setBlockedValues] = useState<FixedValues>();
   const form = useForm<UserEditDto>({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(ProfileSchema),
   });
 
   const onSubmit: SubmitHandler<UserEditDto> = async (data) => {

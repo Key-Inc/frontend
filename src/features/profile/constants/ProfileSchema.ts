@@ -1,7 +1,7 @@
 import { PHONE_REG } from '@/shared/constants/regex';
 import { z } from 'zod';
 
-export const validationSchema = z.object({
+export const ProfileSchema = z.object({
   email: z.string().email('Неверный формат почты'),
   birthDate: z
     .string()
