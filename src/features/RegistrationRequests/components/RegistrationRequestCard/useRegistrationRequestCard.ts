@@ -2,12 +2,13 @@
 import { useState } from 'react';
 import { putUserApprove, putUserReject } from '@/shared/utils';
 
-export const useRegistrationRequestCard = (userid: string, userrole: string) => {
-  const [userRole, setUserRole] = useState(userrole);
+export const useRegistrationRequestCard = (userid: string) => {
+  const [userRole, setUserRole] = useState('Student');
 
+  console.log(userRole);
   const handleApprove = async () => {
     //@ts-ignore
-    await putUserApprove(userid, { applicantRole: userRole });
+    await putUserApprove(userid, userRole);
   };
 
   const handleReject = async () => {
