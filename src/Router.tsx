@@ -5,6 +5,7 @@ import { RegistrationRequestsPage } from '@/pages/RegistrationRequestsPage/Regis
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { KeysPage } from './pages/KeysPage/KeysPage';
 import { KeysRequestsPage } from './pages/KeysRequestsPage/KeysRequestsPage';
+import { UsersPage } from './pages/UsersPage/UsersPage';
 
 export const Router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const Router = createBrowserRouter([
       {
         path: '/keys',
         element: <KeysPage />,
+      },
+      {
+        path: '/users',
+        element: <UsersPage />,
       },
     ],
   },
