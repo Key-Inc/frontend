@@ -8,15 +8,16 @@ import {
 import { Select } from '@/components/ui';
 import { useDebounce } from '@uidotdev/usehooks';
 import { useEffect, useState } from 'react';
+import { handleChangeRole, handleChangeStatus } from './Filtering.utils';
 
 interface FilteringProps {
-  setParamsByName: (name: string, value: string) => void;
+  setParamsByName: (name: string, value?: string) => void;
   getParamsByName: (name: string) => string;
 }
 
 export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) => {
   const [fullName, setFullName] = useState(getParamsByName('FullName'));
-  const [size, setSize] = useState(getParamsByName('Size'));
+  const [size, setSize] = useState(getParamsByName('Size') || '10');
   const debouncedFullName = useDebounce(fullName, 300);
   const debouncedSize = useDebounce(size, 300);
 
@@ -46,13 +47,14 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
       <div>
         <span>Роль заявителя</span>
         <Select
-          defaultValue={getParamsByName('Role')}
-          onValueChange={(value) => setParamsByName('Role', value)}
+          defaultValue={getParamsByName('Role') || 'Any'}
+          onValueChange={(value) => handleChangeRole(value, setParamsByName)}
         >
           <SelectTrigger>
             <SelectValue placeholder='Роль' />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value='Any'>Любая</SelectItem>
             <SelectItem value='Student'>Студент</SelectItem>
             <SelectItem value='Teacher'>Учитель</SelectItem>
             <SelectItem value='Dean'>Деканат</SelectItem>
@@ -69,12 +71,12 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
             <SelectValue placeholder='Сортировка' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='CreateDesc'>Сначала старые</SelectItem>
-            <SelectItem value='CreateAsc'>Сначала новые</SelectItem>
-            <SelectItem value='StartDateAsc'>
+            <SelectItem value='CreateAsc'>Сначала старые</SelectItem>
+            <SelectItem value='CreateDesc'>Сначала новые</SelectItem>
+            <SelectItem value='StartDateDesc'>
               Сначала заявки, которые начинаются первыми
             </SelectItem>
-            <SelectItem value='StartDateDesc'>
+            <SelectItem value='StartDateAsc'>
               Сначала заявки, которые начинаются последними
             </SelectItem>
           </SelectContent>
@@ -100,13 +102,14 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
       <div>
         <span>Статус заявки</span>
         <Select
-          defaultValue={getParamsByName('Status')}
-          onValueChange={(value) => setParamsByName('Status', value)}
+          defaultValue={getParamsByName('Status') || 'Any'}
+          onValueChange={(value) => handleChangeStatus(value, setParamsByName)}
         >
           <SelectTrigger>
             <SelectValue placeholder='Статус' />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value='Any'>Любая</SelectItem>
             <SelectItem value='Accepted'>Принятые</SelectItem>
             <SelectItem value='Rejected'>Отклонённые</SelectItem>
             <SelectItem value='UnderConsideration'>На рассмотрении</SelectItem>

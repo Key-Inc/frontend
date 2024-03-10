@@ -20,15 +20,18 @@ import { translateGender } from '@/shared/utils';
 interface RegistrationRequestCardProps {
   user: UserDto;
   fetchRegistrationRequests: () => void;
+  resetPage: () => void;
 }
 
 export const RegistrationRequestCard = ({
   user,
   fetchRegistrationRequests,
+  resetPage,
 }: RegistrationRequestCardProps) => {
   const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(
     user.id,
     fetchRegistrationRequests,
+    resetPage,
   );
 
   return (

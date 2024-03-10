@@ -2,7 +2,7 @@ import { Loader } from '@/components/ui';
 import { useKeysRequests } from './hooks/useKeysRequests';
 import { RequestsTable } from './components/RequestsTable';
 import { getColumns } from './constants/columns.tsx';
-import { Filtering } from './components/Filtering.tsx';
+import { Filtering } from './components/Filtering/Filtering.tsx';
 import { Pagination } from '@/components/common';
 import { OverlappingRequests } from './components/OverlappingRequests/OverlappingRequests.tsx';
 
@@ -12,7 +12,6 @@ export const KeysRequests = () => {
     setParamsByName,
     handleApprove,
     isDialogOpen,
-    getRequestIdByIndex,
     getParamsByName,
     previousPage,
     nextPage,
@@ -20,12 +19,10 @@ export const KeysRequests = () => {
     dialogId,
     isLoading,
     handleReject,
+    reset,
   } = useKeysRequests();
 
-  const COLUMNS = getColumns(
-    (index) => handleApprove(getRequestIdByIndex(index)),
-    (index) => handleReject(getRequestIdByIndex(index)),
-  );
+  const COLUMNS = getColumns(handleApprove, handleReject);
 
   return (
     <div className='flex gap-5 flex-col max-w-full'>
@@ -33,6 +30,7 @@ export const KeysRequests = () => {
         toggle={() => setIsDialogOpen((prev) => !prev)}
         isOpen={isDialogOpen}
         id={dialogId}
+        reset={reset}
       />
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
       {isLoading ? <Loader /> : <RequestsTable columns={COLUMNS} data={requestsList} />}

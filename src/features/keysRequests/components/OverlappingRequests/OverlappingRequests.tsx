@@ -13,13 +13,20 @@ interface OverlappingRequestsProps {
   isOpen: boolean;
   id: string;
   toggle: () => void;
+  reset: () => void;
 }
 
-export const OverlappingRequests = ({ isOpen, id, toggle }: OverlappingRequestsProps) => {
+export const OverlappingRequests = ({
+  isOpen,
+  id,
+  toggle,
+  reset,
+}: OverlappingRequestsProps) => {
   const { requestsList, handleApprove, handleReject } = useOverlappingRequests(
     isOpen,
     toggle,
     id,
+    reset,
   );
 
   return (

@@ -8,6 +8,7 @@ export const useOverlappingRequests = (
   isOpen: boolean,
   toggle: () => void,
   id: string,
+  reset: () => void,
 ) => {
   const [requestsList, setRequestsList] = useState<KeyRequestFullDto[]>([]);
 
@@ -23,6 +24,7 @@ export const useOverlappingRequests = (
 
   const handleApprove = async () => {
     await putKeyApprove(id, true);
+    reset();
     toggle();
   };
 

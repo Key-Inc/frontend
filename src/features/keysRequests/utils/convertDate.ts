@@ -8,7 +8,6 @@ export const convertDate = (date: Date) => {
 };
 
 export const convertToLocaleDate = (value: string) => {
-  console.log(new Date(value.replace('Z', '')).toISOString());
   return new Date(value.replace('Z', ''));
 };
 

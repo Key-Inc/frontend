@@ -31,12 +31,10 @@ export const useKeysRequests = () => {
     setParamsByName('Page', String(Number(params.get('Page')!) - 1));
   };
 
-  const getRequestIdByIndex = (index: number) => requestsList[index].id;
-
   const handleApprove = async (id: string) => {
     try {
       await putKeyApprove(id, false);
-      await fetchKeysRequest();
+      reset();
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.status === 400) {
@@ -47,9 +45,14 @@ export const useKeysRequests = () => {
     }
   };
 
+  const reset = () => {
+    setParamsByName('Page', '1');
+    fetchKeysRequest();
+  };
+
   const handleReject = async (id: string) => {
     await putKeyReject(id);
-    await fetchKeysRequest();
+    reset();
   };
 
   const fetchKeysRequest = async () => {
@@ -89,10 +92,6 @@ export const useKeysRequests = () => {
   };
 
   useEffect(() => {
-    setParamsByName('Size', '10');
-  }, []);
-
-  useEffect(() => {
     fetchKeysRequest();
   }, [params]);
 
@@ -101,7 +100,6 @@ export const useKeysRequests = () => {
     nextPage,
     previousPage,
     requestsList,
-    getRequestIdByIndex,
     handleApprove,
     getParamsByName,
     isDialogOpen,
@@ -109,5 +107,6 @@ export const useKeysRequests = () => {
     setIsDialogOpen,
     handleReject,
     isLoading,
+    reset,
   };
 };

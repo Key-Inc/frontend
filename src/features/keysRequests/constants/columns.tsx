@@ -4,8 +4,8 @@ import { convertDate, convertToLocaleDate } from '../utils/convertDate';
 import { translateRequestStatus, translateUserRole } from '@/shared/utils';
 
 export const getColumns = (
-  approve: (index: number) => void,
-  reject: (index: number) => void,
+  approve: (id: string) => void,
+  reject: (id: string) => void,
 ): ColumnDef<KeyRequestFullDto>[] => [
   {
     accessorFn: (row) => translateRequestStatus(row.status),
@@ -40,16 +40,22 @@ export const getColumns = (
   },
   {
     header: 'Подтвердить заявку',
-    cell: (props) => (
-      <Button onClick={() => approve(Number(props.row.id))}>Подтвердить</Button>
-    ),
+    cell: (props) =>
+      props.row.original.status === 'Accepted' ? (
+        'Заявка уже принята'
+      ) : (
+        <Button onClick={() => approve(props.row.original.id)}>Подтвердить</Button>
+      ),
   },
   {
     header: 'Отклонить заявку',
-    cell: (props) => (
-      <Button variant={'destructive'} onClick={() => reject(Number(props.row.id))}>
-        Отклонить
-      </Button>
-    ),
+    cell: (props) =>
+      props.row.original.status === 'Rejected' ? (
+        'Заявка уже отклонена'
+      ) : (
+        <Button variant={'destructive'} onClick={() => reject(props.row.original.id)}>
+          Отклонить
+        </Button>
+      ),
   },
 ];

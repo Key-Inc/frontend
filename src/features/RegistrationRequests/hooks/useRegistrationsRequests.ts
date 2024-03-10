@@ -23,14 +23,14 @@ export const useRegistrationsRequests = () => {
     setParams(params);
   };
 
-  const configParams = {
-    Gender: params.get('Gender'),
-    NameQuery: params.get('NameQuery'),
-    Sorting: params.get('Sorting'),
-    Page: params.get('Page'),
-  };
-
   const fetchRegistrationRequests = async () => {
+    const configParams = {
+      Gender: params.get('Gender'),
+      NameQuery: params.get('NameQuery'),
+      Sorting: params.get('Sorting'),
+      Page: params.get('Page'),
+    };
+
     try {
       const res = await getRegistrationRequests({ params: configParams });
       setUsers(res.data.items);

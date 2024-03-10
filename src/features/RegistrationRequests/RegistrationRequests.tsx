@@ -31,8 +31,8 @@ export const RegistrationRequests = () => {
             <SelectValue placeholder='Сортировка' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='CreateAsc'>Сначала новые</SelectItem>
-            <SelectItem value='CreateDesc'>Сначала старые</SelectItem>
+            <SelectItem value='CreateDesc'>Сначала новые</SelectItem>
+            <SelectItem value='CreateAsc'>Сначала старые</SelectItem>
           </SelectContent>
         </Select>
         <Input
@@ -48,6 +48,7 @@ export const RegistrationRequests = () => {
             user={user}
             key={index}
             fetchRegistrationRequests={fetchRegistrationRequests}
+            resetPage={() => setParamsByName('Page', '1')}
           />
         ))}
       </div>
@@ -56,7 +57,7 @@ export const RegistrationRequests = () => {
         className='justify-end'
         nextPage={nextPage}
         previousPage={previousPage}
-        page={params.get('Page') || ''}
+        page={params.get('Page') || '1'}
       />
     </div>
   );

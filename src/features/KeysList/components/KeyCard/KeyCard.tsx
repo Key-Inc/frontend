@@ -20,7 +20,7 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/shared/utils';
+import { cn, translateUserRole } from '@/shared/utils';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;
@@ -88,7 +88,7 @@ export const KeyCard = ({ classromKey, fetchKeys }: KeyCardProps) => {
                           setOpen(false);
                         }}
                       >
-                        {user.fullName}
+                        {user.fullName}, {translateUserRole(user.userRole)}
                         <CheckIcon
                           className={cn(
                             'ml-auto h-4 w-4',
