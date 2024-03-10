@@ -25,3 +25,14 @@ export const translateUserRole = (role: Role) => {
       return '';
   }
 };
+
+export const translateGender = (gender: Gender) => {
+  switch (gender) {
+    case 'Male':
+      return 'Мужской';
+    case 'Female':
+      return 'Женский';
+    default:
+      return '';
+  }
+};

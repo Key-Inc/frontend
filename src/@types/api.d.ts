@@ -7,10 +7,9 @@ interface UserDto {
   id: string;
   fullName: string;
   birthDate?: string;
-  gender: string;
+  gender: Gender;
   phoneNumber?: string;
   email: string;
-  userRole: Role;
 }
 
 type RegistrationStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
@@ -18,6 +17,8 @@ type RegistrationStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
 type Sorting = 'CreateDesc' | 'CreateAsc' | 'StartDateAsc' | 'StartDateDesc';
 
 type Role = 'Student' | 'Teacher' | 'Dean' | 'Admin';
+
+type Gender = 'Male' | 'Female';
 
 interface ClassroomDto {
   id: string;
@@ -56,18 +57,38 @@ interface UserLiteDto {
   fullName: string;
   userRole: Role;
 }
+interface ClassRoomDto {
+  id: string;
+  number: string;
+  building: string;
+}
 
 interface KeyFullDto {
   id: string;
-  classroomId: string;
+  classroom: ClassRoomDto;
   keyStatus: 'InDeanOffice' | 'InPossession';
   user?: UserLiteDto;
 }
 
-interface SearchUserDto {
+interface UserFullDto {
   id: string;
-  fullname: string;
-  userRole: string;
+  fullName: string;
+  userRole: Role;
+  birthDate: string; //Тут исправить формат, если нужно это будет где-то
+  email: string;
+  phoneNumber?: string;
+  gender: Gender;
+}
+
+interface PageInfoDto {
+  size: number;
+  current: number;
+  count: number;
+}
+
+interface UserFullDtoPagedListDto {
+  items: UserFullDto[];
+  pagination: PageInfoDto;
 }
 
 interface KeyRequestPagedListDto {

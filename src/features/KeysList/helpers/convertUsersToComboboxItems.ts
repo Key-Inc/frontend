@@ -1,9 +1,7 @@
 import { ComboBoxItemType } from '@/components/ui';
 
-export const convertUsersToComboboxItems = (
-  users?: SearchUserDto[],
-): ComboBoxItemType[] =>
+export const convertUsersToComboboxItems = (users?: UserFullDto[]): ComboBoxItemType[] =>
   users?.map((user) => ({
-    label: user.fullname,
+    label: user.fullName,
     value: user.id,
   })) ?? [];
