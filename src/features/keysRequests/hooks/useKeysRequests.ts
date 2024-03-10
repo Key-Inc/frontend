@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { KeysRequestsQueryParams } from '../types/KeysRequestsQueryParams';
 import { AxiosError } from 'axios';
-import { getKeysRequests } from '@/shared/utils';
+import { getKeysRequests, putKeyReject } from '@/shared/utils';
 import { putKeyApprove } from '@/shared/utils';
 
 export const useKeysRequests = () => {
@@ -13,9 +13,11 @@ export const useKeysRequests = () => {
   const [params, setParams] = useSearchParams();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogId, setDialogId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const setParamsByName = (name: string, value: string) => {
-    params.set(name, value);
+  const setParamsByName = (name: string, value?: string) => {
+    if (value) params.set(name, value);
+    else params.delete(name);
     setParams(params);
   };
 
@@ -34,6 +36,7 @@ export const useKeysRequests = () => {
   const handleApprove = async (id: string) => {
     try {
       await putKeyApprove(id, false);
+      await fetchKeysRequest();
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.status === 400) {
@@ -44,39 +47,53 @@ export const useKeysRequests = () => {
     }
   };
 
-  useEffect(() => {
-    setParamsByName('Size', '10');
+  const handleReject = async (id: string) => {
+    await putKeyReject(id);
+    await fetchKeysRequest();
+  };
 
-    const configParams = {
-      MinDate: params.get('MinDate'),
-      MaxDate: params.get('MaxDate'),
-      FullName: params.get('FullName'),
+  const fetchKeysRequest = async () => {
+    const minDate = params.get('MinDate');
+    const maxDate = params.get('MaxDate');
+
+    const configParams: KeysRequestsQueryParams = {
+      MinDate: minDate ? new Date(minDate).toISOString() : null,
+      MaxDate: maxDate ? new Date(maxDate).toISOString() : null,
+      FullName: params.get('FullName') || null,
       Role: params.get('Role'),
       Sorting: params.get('Sorting'),
       Page: params.get('Page'),
       Size: params.get('Size'),
+      Status: params.get('Status'),
     };
 
-    const fetchData = async () => {
-      try {
-        setRequestsList([]);
-        const res = await getKeysRequests({
-          params: configParams,
-        });
-        setRequestsList(res.data.items);
-        setParamsValues({ ...configParams });
-      } catch (error) {
-        if (paramsValues.FullName) params.set('FullName', paramsValues.FullName);
-        if (paramsValues.Page) params.set('Page', paramsValues.Page);
-        if (paramsValues.MinDate) params.set('MinDate', paramsValues.MinDate);
-        if (paramsValues.MaxDate) params.set('MaxDate', paramsValues.MaxDate);
-        if (paramsValues.Role) params.set('Role', paramsValues.Role);
-        if (paramsValues.Sorting) params.set('Sorting', paramsValues.Sorting);
-        setParams(params);
-        console.error(error);
-      }
-    };
-    fetchData();
+    setRequestsList([]);
+    setIsLoading(true);
+
+    try {
+      const res = await getKeysRequests({
+        params: configParams,
+      });
+      setRequestsList(res.data.items);
+      setParamsValues({ ...configParams });
+    } catch (error) {
+      if (paramsValues.FullName) params.set('FullName', paramsValues.FullName);
+      if (paramsValues.Page) params.set('Page', paramsValues.Page);
+      if (paramsValues.MinDate) params.set('MinDate', paramsValues.MinDate);
+      if (paramsValues.MaxDate) params.set('MaxDate', paramsValues.MaxDate);
+      if (paramsValues.Role) params.set('Role', paramsValues.Role);
+      if (paramsValues.Sorting) params.set('Sorting', paramsValues.Sorting);
+      setParams(params);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    setParamsByName('Size', '10');
+  }, []);
+
+  useEffect(() => {
+    fetchKeysRequest();
   }, [params]);
 
   return {
@@ -90,5 +107,7 @@ export const useKeysRequests = () => {
     isDialogOpen,
     dialogId,
     setIsDialogOpen,
+    handleReject,
+    isLoading,
   };
 };

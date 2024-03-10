@@ -36,9 +36,7 @@ interface KeyRequestFullDto {
   status: RequestStatus;
   startDate: string;
   endDate: string;
-  isRecurring: boolean;
-  // classroom: ClassroomDto;
-  classroomId: string;
+  classroom: ClassroomDto;
   user: UserLiteDto;
   endDateOfRecurrence: string;
 }

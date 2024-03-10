@@ -7,35 +7,34 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { convertDate } from '../utils/convertDate';
+import { convertDate, convertToLocaleDate } from '../utils/convertDate';
 import { translateUserRole } from '@/shared/utils';
-import { putKeyReject } from '@/shared/utils';
 
-export const RequestCard = ({
-  classroomId,
-  endDate,
-  isRecurring,
-  startDate,
-  user,
-  id,
-}: KeyRequestFullDto) => {
+export interface RequestCardProps {
+  request: KeyRequestFullDto;
+  handleReject: () => void;
+}
+
+export const RequestCard = ({ request, handleReject }: RequestCardProps) => {
   return (
     <Card className='min-w-[330px] max-w-[440px] flex-1'>
       <CardHeader>
-        <CardTitle className='text-xl'>{user.fullName}</CardTitle>
-        <CardDescription>{translateUserRole(user.userRole)}</CardDescription>
+        <CardTitle className='text-xl'>{request.user.fullName}</CardTitle>
+        <CardDescription>{translateUserRole(request.user.userRole)}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-col'>
         <p>
-          {/* {classroom.number} ({classroom.building}) */}
-          {classroomId}
+          {request.classroom.number} ({request.classroom.building})
         </p>
-        <p>Дата начала: {convertDate(new Date(startDate))}</p>
-        <p>Дата окончания: {convertDate(new Date(endDate))}</p>
-        <p>Повторяющаяся: {isRecurring ? 'Да' : 'Нет'}</p>
+        <p>Дата начала: {convertDate(convertToLocaleDate(request.startDate))}</p>
+        <p>Дата окончания: {convertDate(convertToLocaleDate(request.endDate))}</p>
+        <p>
+          Повторяющаяся:{' '}
+          {request.endDateOfRecurrence ? `Да, до ${request.endDateOfRecurrence}` : 'Нет'}
+        </p>
       </CardContent>
       <CardFooter>
-        <Button variant='destructive' onClick={() => putKeyReject(id)}>
+        <Button variant='destructive' onClick={handleReject}>
           Отклонить
         </Button>
       </CardFooter>
