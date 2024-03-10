@@ -84,7 +84,6 @@ export const useKeysRequests = () => {
       if (paramsValues.Role) params.set('Role', paramsValues.Role);
       if (paramsValues.Sorting) params.set('Sorting', paramsValues.Sorting);
       setParams(params);
-      console.error(error);
     }
     setIsLoading(false);
   };
