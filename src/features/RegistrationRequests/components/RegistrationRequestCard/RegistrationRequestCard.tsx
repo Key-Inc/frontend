@@ -19,10 +19,16 @@ import { translateGender } from '@/shared/utils';
 
 interface RegistrationRequestCardProps {
   user: UserDto;
+  fetchRegistrationRequests: () => void;
 }
-export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) => {
+
+export const RegistrationRequestCard = ({
+  user,
+  fetchRegistrationRequests,
+}: RegistrationRequestCardProps) => {
   const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(
     user.id,
+    fetchRegistrationRequests,
   );
 
   return (
@@ -32,7 +38,7 @@ export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) 
         <CardDescription>{user.phoneNumber}</CardDescription>
       </CardHeader>
       <CardContent className='flex flex-col'>
-        <Select onValueChange={(value) => setUserRole(value)} defaultValue={'Student'}>
+        <Select onValueChange={(value) => setUserRole(value)} defaultValue='Student'>
           <SelectTrigger className='w-[150px] h-8'>
             <SelectValue placeholder='Роль' />
           </SelectTrigger>

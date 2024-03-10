@@ -1,9 +1,15 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { KeyCard } from './components/KeyCard/KeyCard';
 import { useKeysList } from './hooks/useKeysList';
 
 export const KeysList = () => {
-  const { keys, setKeyStatus } = useKeysList();
+  const { keys, setKeyStatus, fetchKeys } = useKeysList();
   return (
     <div className='pt-4'>
       <Select onValueChange={(value) => setKeyStatus(value)} defaultValue='InDeanOffice'>
@@ -17,7 +23,7 @@ export const KeysList = () => {
       </Select>
       <div className='flex gap-5 py-4 flex-wrap'>
         {keys.map((key, index) => (
-          <KeyCard classromKey={key} key={index} />
+          <KeyCard classromKey={key} key={index} fetchKeys={fetchKeys} />
         ))}
       </div>
     </div>

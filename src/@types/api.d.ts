@@ -57,10 +57,15 @@ interface UserLiteDto {
   fullName: string;
   userRole: Role;
 }
+interface ClassRoomDto {
+  id: string;
+  number: string;
+  building: string;
+}
 
 interface KeyFullDto {
   id: string;
-  classroomId: string;
+  classroom: ClassRoomDto;
   keyStatus: 'InDeanOffice' | 'InPossession';
   user?: UserLiteDto;
 }
