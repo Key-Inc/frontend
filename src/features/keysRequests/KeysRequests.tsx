@@ -28,7 +28,7 @@ export const KeysRequests = () => {
   );
 
   return (
-    <div className='flex gap-5 flex-col'>
+    <div className='flex gap-5 flex-col max-w-full'>
       <OverlappingRequests
         toggle={() => setIsDialogOpen((prev) => !prev)}
         isOpen={isDialogOpen}
