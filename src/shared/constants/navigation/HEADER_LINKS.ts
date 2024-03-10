@@ -10,6 +10,10 @@ export const HEADER_LINKS: NavigationLinkInfo[] = [
     text: 'Заявки на регистрацию',
     href: ROUTES.REGISTRATIONREQUESTS,
   },
+  // {
+  //   text: 'Заявки на ключи',
+  //   href: ROUTES.ROOT,
+  // },
   {
     text: 'Ключи',
     href: ROUTES.KEYS,
