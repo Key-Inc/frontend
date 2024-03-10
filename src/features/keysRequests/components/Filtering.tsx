@@ -96,6 +96,22 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
           onChange={(e) => setSize(e.target.value)}
         />
       </div>
+      <div>
+        <span>Статус заявки</span>
+        <Select
+          defaultValue={getParamsByName('Status')}
+          onValueChange={(value) => setParamsByName('Status', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder='Статус' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='Accepted'>Принятые</SelectItem>
+            <SelectItem value='Rejected'>Отклонённые</SelectItem>
+            <SelectItem value='UnderConsideration'>На рассмотрении</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 };

@@ -56,7 +56,7 @@ export const useKeysRequests = () => {
     const minDate = params.get('MinDate');
     const maxDate = params.get('MaxDate');
 
-    const configParams = {
+    const configParams: KeysRequestsQueryParams = {
       MinDate: minDate ? new Date(minDate).toISOString() : null,
       MaxDate: maxDate ? new Date(maxDate).toISOString() : null,
       FullName: params.get('FullName') || null,
@@ -64,6 +64,7 @@ export const useKeysRequests = () => {
       Sorting: params.get('Sorting'),
       Page: params.get('Page'),
       Size: params.get('Size'),
+      Status: params.get('Status'),
     };
 
     setRequestsList([]);
@@ -90,7 +91,9 @@ export const useKeysRequests = () => {
 
   useEffect(() => {
     setParamsByName('Size', '10');
+  }, []);
 
+  useEffect(() => {
     fetchKeysRequest();
   }, [params]);
 

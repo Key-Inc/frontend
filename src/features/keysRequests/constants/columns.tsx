@@ -20,8 +20,7 @@ export const getColumns = (
     header: 'Роль человека',
   },
   {
-    // accessorFn: (row) => `${row.classroom.number} (${row.classroom.building})`,
-    accessorFn: (row) => `${row.classroomId})`,
+    accessorFn: (row) => `${row.classroom.number} (${row.classroom.building})`,
     header: 'Кабинет, корпус',
   },
   {
