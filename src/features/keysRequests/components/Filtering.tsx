@@ -26,7 +26,7 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
   }, [debouncedFullName, debouncedSize]);
 
   return (
-    <div className='grid md:grid-cols-2 gap-4 py-5 px-10 grid-cols-1'>
+    <div className='grid md:grid-cols-2 gap-4 py-5 px-8 grid-cols-1'>
       <div>
         <span>Минимальная дата подачи заявки</span>
         <Input
@@ -96,6 +96,22 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
           value={size}
           onChange={(e) => setSize(e.target.value)}
         />
+      </div>
+      <div>
+        <span>Статус заявки</span>
+        <Select
+          defaultValue={getParamsByName('Status')}
+          onValueChange={(value) => setParamsByName('Status', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder='Статус' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='Accepted'>Принятые</SelectItem>
+            <SelectItem value='Rejected'>Отклонённые</SelectItem>
+            <SelectItem value='UnderConsideration'>На рассмотрении</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

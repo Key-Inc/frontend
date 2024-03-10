@@ -13,7 +13,7 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 500) {
-      toast.error(`Ошибка сервера:${error.response.data.title}`, {
+      toast.error(`Ошибка сервера:${error.response.data.Message}`, {
         cancel: { label: 'Close' },
       });
     }
@@ -21,7 +21,7 @@ api.interceptors.response.use(
       deleteCookieValue('token');
       if (!window.location.href.includes('auth')) window.location.href = '/auth';
     }
-    toast.error(`Произошла ошибка:${error.response.data.title}`, {
+    toast.error(`Произошла ошибка:${error.response.data.Message}`, {
       cancel: { label: 'Close' },
     });
     return Promise.reject(error);

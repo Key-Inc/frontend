@@ -6,4 +6,5 @@ export interface KeysRequestsQueryParams {
   Sorting: string | null;
   Page: string | null;
   Size: string | null;
+  Status: string | null;
 }

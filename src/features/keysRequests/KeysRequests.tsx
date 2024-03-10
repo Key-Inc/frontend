@@ -5,7 +5,6 @@ import { getColumns } from './constants/columns.tsx';
 import { Filtering } from './components/Filtering.tsx';
 import { Pagination } from '@/components/common';
 import { OverlappingRequests } from './components/OverlappingRequests/OverlappingRequests.tsx';
-import { putKeyReject } from '@/shared/utils';
 
 export const KeysRequests = () => {
   const {
@@ -19,26 +18,24 @@ export const KeysRequests = () => {
     nextPage,
     setIsDialogOpen,
     dialogId,
+    isLoading,
+    handleReject,
   } = useKeysRequests();
 
   const COLUMNS = getColumns(
     (index) => handleApprove(getRequestIdByIndex(index)),
-    (index) => putKeyReject(getRequestIdByIndex(index)),
+    (index) => handleReject(getRequestIdByIndex(index)),
   );
 
   return (
-    <div className='flex gap-5 flex-col'>
+    <div className='flex gap-5 flex-col max-w-full'>
       <OverlappingRequests
         toggle={() => setIsDialogOpen((prev) => !prev)}
         isOpen={isDialogOpen}
         id={dialogId}
       />
       <Filtering getParamsByName={getParamsByName} setParamsByName={setParamsByName} />
-      {requestsList.length ? (
-        <RequestsTable columns={COLUMNS} data={requestsList} />
-      ) : (
-        <Loader />
-      )}
+      {isLoading ? <Loader /> : <RequestsTable columns={COLUMNS} data={requestsList} />}
       <Pagination
         className='justify-center mt-auto'
         nextPage={nextPage}
