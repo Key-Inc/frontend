@@ -7,10 +7,9 @@ interface UserDto {
   id: string;
   fullName: string;
   birthDate?: string;
-  gender: string;
+  gender: Gender;
   phoneNumber?: string;
   email: string;
-  userRole: Role;
 }
 
 type RequestStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
@@ -18,6 +17,8 @@ type RequestStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
 type Sorting = 'CreateDesc' | 'CreateAsc' | 'StartDateAsc' | 'StartDateDesc';
 
 type Role = 'Student' | 'Teacher' | 'Dean' | 'Admin';
+
+type Gender = 'Male' | 'Female';
 
 interface ClassroomDto {
   id: string;
@@ -72,10 +73,11 @@ interface KeyFullDto {
 interface UserFullDto {
   id: string;
   fullName: string;
-  userRole: string;
-  bithdate: string; //Тут исправить формат, если нужно это будет где-то
+  userRole: Role;
+  birthDate: string; //Тут исправить формат, если нужно это будет где-то
   email: string;
-  gender: string;
+  phoneNumber?: string;
+  gender: Gender;
 }
 
 interface PageInfoDto {

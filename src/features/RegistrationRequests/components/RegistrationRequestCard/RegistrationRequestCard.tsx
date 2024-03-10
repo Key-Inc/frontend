@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { translateGender } from '@/shared/utils';
 
 interface RegistrationRequestCardProps {
   user: UserDto;
@@ -48,7 +49,7 @@ export const RegistrationRequestCard = ({
           </SelectContent>
         </Select>
         <div className='flex space-y-2 flex-col mt-3 text-sm'>
-          <span>{user.gender == 'male' ? 'Мужчина' : 'Женщина'}</span>
+          <span>{translateGender(user.gender)}</span>
           <span>{user.email}</span>
         </div>
       </CardContent>
