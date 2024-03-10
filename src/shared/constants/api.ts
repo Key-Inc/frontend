@@ -12,3 +12,4 @@ export const REQUEST = `${ROOT}/request`;
 export const KEY_APPROVE = (id: string) => `${REQUEST}/${id}/approve`;
 export const KEY_REJECT = (id: string) => `${REQUEST}/${id}/reject`;
 export const OVERLAPPING = (id: string) => `${REQUEST}/${id}/overlapping`;
+export const USER_ROLE = `${ACCOUNT}/role`;

@@ -3,9 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { validationSchema } from '../constants/validation';
 
 import { useNavigate } from 'react-router-dom';
-import { getRegistrationStatus, postLogin } from '@/shared/utils';
+import { getRegistrationStatus, postLogin, getUserRole } from '@/shared/utils';
 import { useState } from 'react';
 import { getForbiddenError } from '../utils/getForbiddenError';
+import { ForbiddenCause } from '../types/forbidden';
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
@@ -15,19 +16,25 @@ export const useLoginForm = () => {
   const [isForbidden, setIsForbidden] = useState(false);
   const [forbiddenCause, setForbiddenCause] = useState('');
 
+  const setError = (status: ForbiddenCause) => {
+    const errorText = getForbiddenError(status);
+    setForbiddenCause(errorText);
+    setIsForbidden(true);
+    form.setError('root', { message: errorText });
+  };
+
   const onSubmit: SubmitHandler<LoginCredintialsDto> = async (data) => {
     try {
       const res = await postLogin(data);
       document.cookie = `token=${res.data.token}`;
       const status = (await getRegistrationStatus()).data;
       if (status !== 'Accepted') {
-        const errorText = getForbiddenError(status);
-        setForbiddenCause(errorText);
-        setIsForbidden(true);
-        form.setError('root', { message: errorText });
+        setError(status);
+      } else {
+        const userRole = (await getUserRole()).data;
+        if (userRole === 'Student' || userRole === 'Teacher') setError('Role');
+        else navigate('/');
       }
-
-      navigate('/');
     } catch (e) {
       form.setError('root', { message: String(e) });
     }
