@@ -24,23 +24,27 @@ import { cn } from '@/shared/utils';
 
 interface KeyCardProps {
   classromKey: KeyFullDto;
+  fetchKeys: () => void;
 }
 
-export const KeyCard = ({ classromKey }: KeyCardProps) => {
+export const KeyCard = ({ classromKey, fetchKeys }: KeyCardProps) => {
   const {
     handleUserSelect,
     hadleReturnInStock,
     users,
     handleSearchChange,
     hadleIssueToUser,
-  } = useKeyCard(classromKey.id);
+  } = useKeyCard(classromKey.id, fetchKeys);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<UserFullDto | null>(null);
 
   return (
     <Card className='min-w-[280px] max-w-[400px] flex-1 flex justify-between flex-col'>
       <CardHeader className='pb-1'>
-        <CardTitle className='text-xl'>{classromKey.classroomId}</CardTitle>
+        <CardTitle className='text-xl flex flex-col'>
+          <span>Аудитория {classromKey.classroom.number} </span>
+          <span>Корпус {classromKey.classroom.building}</span>
+        </CardTitle>
         {classromKey.user && (
           <CardDescription>{classromKey.user.fullName}</CardDescription>
         )}

@@ -23,29 +23,38 @@ export const useRegistrationsRequests = () => {
     setParams(params);
   };
 
-  useEffect(() => {
-    const configParams = {
-      Gender: params.get('Gender'),
-      NameQuery: params.get('NameQuery'),
-      Sorting: params.get('Sorting'),
-      Page: params.get('Page'),
-    };
+  const configParams = {
+    Gender: params.get('Gender'),
+    NameQuery: params.get('NameQuery'),
+    Sorting: params.get('Sorting'),
+    Page: params.get('Page'),
+  };
 
-    const fetchData = async () => {
-      try {
-        const res = await getRegistrationRequests({ params: configParams });
-        setUsers(res.data.items);
-        setValues({ ...configParams });
-      } catch (error) {
-        if (values.NameQuery) params.set('NameQuery', values.NameQuery);
-        if (values.Page) params.set('Page', values.Page);
-        if (values.Sorting) params.set('Sorting', values.Sorting);
-        setParams(params);
-        console.error(error);
-      }
-    };
-    fetchData();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fetchRegistrationRequests = async () => {
+    try {
+      const res = await getRegistrationRequests({ params: configParams });
+      setUsers(res.data.items);
+      setValues({ ...configParams });
+    } catch (error) {
+      if (values.NameQuery) params.set('NameQuery', values.NameQuery);
+      if (values.Page) params.set('Page', values.Page);
+      if (values.Sorting) params.set('Sorting', values.Sorting);
+      setParams(params);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRegistrationRequests();
   }, [params]);
 
-  return { users, params, setParamsByName, nextPage, previousPage };
+  return {
+    users,
+    params,
+    setParamsByName,
+    nextPage,
+    previousPage,
+    fetchRegistrationRequests,
+  };
 };

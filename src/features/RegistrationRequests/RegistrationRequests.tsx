@@ -11,8 +11,14 @@ import {
 import { Pagination } from '@/components/common';
 
 export const RegistrationRequests = () => {
-  const { users, setParamsByName, params, nextPage, previousPage } =
-    useRegistrationsRequests();
+  const {
+    users,
+    setParamsByName,
+    params,
+    nextPage,
+    previousPage,
+    fetchRegistrationRequests,
+  } = useRegistrationsRequests();
 
   return (
     <div>
@@ -38,7 +44,11 @@ export const RegistrationRequests = () => {
 
       <div className='flex gap-4 flex-wrap items-center justify-center'>
         {users.map((user, index) => (
-          <RegistrationRequestCard user={user} key={index} />
+          <RegistrationRequestCard
+            user={user}
+            key={index}
+            fetchRegistrationRequests={fetchRegistrationRequests}
+          />
         ))}
       </div>
 

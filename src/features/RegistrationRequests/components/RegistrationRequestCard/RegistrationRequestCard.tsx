@@ -18,11 +18,16 @@ import {
 
 interface RegistrationRequestCardProps {
   user: UserDto;
+  fetchRegistrationRequests: () => void;
 }
-export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) => {
+
+export const RegistrationRequestCard = ({
+  user,
+  fetchRegistrationRequests,
+}: RegistrationRequestCardProps) => {
   const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(
     user.id,
-    // user.userRole,
+    fetchRegistrationRequests,
   );
 
   return (
