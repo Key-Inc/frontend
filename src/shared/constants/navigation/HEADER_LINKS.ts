@@ -11,11 +11,15 @@ export const HEADER_LINKS: NavigationLinkInfo[] = [
     href: ROUTES.REGISTRATIONREQUESTS,
   },
   {
+    text: 'Заявки на ключи',
+    href: ROUTES.ROOT,
+  },
+  {
     text: 'Ключи',
     href: ROUTES.KEYS,
   },
-  {
-    text: 'Профиль',
-    href: ROUTES.PROFILE,
-  },
+  // {
+  //   text: 'Профиль',
+  //   href: ROUTES.PROFILE,
+  // },
 ];

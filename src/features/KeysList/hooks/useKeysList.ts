@@ -5,13 +5,14 @@ export const useKeysList = () => {
   const [keys, setKeys] = useState<KeyFullDto[]>([]);
   const [keyStatus, setKeyStatus] = useState('');
 
+  const fetchKeys = async () => {
+    const res = await getKeysList({ params: { keyStatus } });
+    setKeys(res.data);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getKeysList({ params: { keyStatus } });
-      setKeys(res.data);
-    };
-    fetchData();
+    fetchKeys();
   }, [keyStatus]);
 
-  return { keys, setKeyStatus };
+  return { keys, setKeyStatus, fetchKeys };
 };

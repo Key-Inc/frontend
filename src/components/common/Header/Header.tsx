@@ -34,10 +34,7 @@ export const Header = () => {
           <div className='gap-2 items-center md:flex hidden'>
             <Button>
               <Link to='/profile'>
-                <span>
-                  {/* {email} */}
-                  тут еmail
-                </span>
+                <span>Профиль</span>
               </Link>
             </Button>
             <Button onClick={handleLogout}>

@@ -55,6 +55,7 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
           <SelectContent>
             <SelectItem value='Student'>Студент</SelectItem>
             <SelectItem value='Teacher'>Учитель</SelectItem>
+            <SelectItem value='Dean'>Деканат</SelectItem>
           </SelectContent>
         </Select>
       </div>
