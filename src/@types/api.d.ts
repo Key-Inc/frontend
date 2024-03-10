@@ -12,7 +12,7 @@ interface UserDto {
   email: string;
 }
 
-type RequestStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
+type RegistrationStatus = 'UnderConsideration' | 'Accepted' | 'Rejected';
 
 type Sorting = 'CreateDesc' | 'CreateAsc' | 'StartDateAsc' | 'StartDateDesc';
 
@@ -33,7 +33,7 @@ interface UserLiteDto {
 
 interface KeyRequestFullDto {
   id: string;
-  status: RequestStatus;
+  status: RegistrationStatus;
   startDate: string;
   endDate: string;
   classroom: ClassroomDto;

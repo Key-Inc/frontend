@@ -1,4 +1,4 @@
-import { getCookieByName } from '@/shared/utils';
+import { deleteCookieValue, getCookieByName } from '@/shared/utils';
 import { ROOT } from '@/shared/constants/api';
 import axios from 'axios';
 import { toast } from 'sonner';
@@ -18,7 +18,7 @@ api.interceptors.response.use(
       });
     }
     if (error.response.status === 401) {
-      localStorage.clear();
+      deleteCookieValue('token');
       if (!window.location.href.includes('auth')) window.location.href = '/auth';
     }
     toast.error(`Произошла ошибка:${error.response.data.Message}`, {
