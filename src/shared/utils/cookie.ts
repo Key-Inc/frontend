@@ -7,3 +7,18 @@ export const getCookieByName = (name: string) => {
 
   return cookie?.split('=')[1];
 };
+
+export const setCookieValue = (
+  name: string,
+  value: string,
+  expiresDate?: Date,
+  samesite: boolean = false,
+) => {
+  document.cookie = `${name}=${value}; ${samesite ? 'samesite=lax;' : ''} ${
+    expiresDate ? `expires=${expiresDate.toUTCString()}` : ''
+  }`;
+};
+
+export const deleteCookieValue = (name: string) => {
+  document.cookie = `${name}=; Max-Age=-1`;
+};

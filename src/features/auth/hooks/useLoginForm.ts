@@ -3,7 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { validationSchema } from '../constants/validation';
 
 import { useNavigate } from 'react-router-dom';
-import { getRegistrationStatus, postLogin, getUserRole } from '@/shared/utils';
+import {
+  getRegistrationStatus,
+  postLogin,
+  getUserRole,
+  setCookieValue,
+  deleteCookieValue,
+} from '@/shared/utils';
 import { useState } from 'react';
 import { getForbiddenError } from '../utils/getForbiddenError';
 import { ForbiddenCause } from '../types/forbidden';
@@ -21,12 +27,13 @@ export const useLoginForm = () => {
     setForbiddenCause(errorText);
     setIsForbidden(true);
     form.setError('root', { message: errorText });
+    deleteCookieValue('token');
   };
 
   const onSubmit: SubmitHandler<LoginCredintialsDto> = async (data) => {
     try {
       const res = await postLogin(data);
-      document.cookie = `token=${res.data.token}`;
+      setCookieValue('token', res.data.token);
       const status = (await getRegistrationStatus()).data;
       if (status !== 'Accepted') {
         setError(status);

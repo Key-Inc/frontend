@@ -1,9 +1,10 @@
+import { deleteCookieValue } from '@/shared/utils';
 import { useNavigate } from 'react-router-dom';
 
 export const useHeader = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
+    deleteCookieValue('token');
     navigate('/auth');
   };
 
