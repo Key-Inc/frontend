@@ -1,1 +1,1 @@
-export type FixedValues = Omit<UserDto, keyof UserEditDto>;
+export type FixedValues = Omit<UserFullDto, keyof UserEditDto>;

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { validationSchema } from '../constants/validation';
+import { ProfileSchema } from '../constants/ProfileSchema';
 import { FixedValues } from '../types/form';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -10,7 +10,7 @@ import { getProfile } from '@/shared/utils';
 export const useProfileForm = () => {
   const [blockedValues, setBlockedValues] = useState<FixedValues>();
   const form = useForm<UserEditDto>({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(ProfileSchema),
   });
 
   const onSubmit: SubmitHandler<UserEditDto> = async (data) => {
@@ -28,8 +28,8 @@ export const useProfileForm = () => {
       const res = await getProfile();
       const { email, phoneNumber, birthDate, ...fixedData } = res.data;
       form.setValue('email', email);
-      form.setValue('phoneNumber', phoneNumber || '');
-      form.setValue('birthDate', birthDate?.substring(0, 10) || '');
+      form.setValue('phoneNumber', phoneNumber || undefined);
+      form.setValue('birthDate', birthDate?.substring(0, 10) || undefined);
       setBlockedValues(fixedData);
     } catch (e) {
       toast(String(e));

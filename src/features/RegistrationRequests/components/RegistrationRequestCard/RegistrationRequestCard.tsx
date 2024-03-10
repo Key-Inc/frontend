@@ -1,16 +1,32 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { useRegistrationRequestCard } from './useRegistrationRequestCard';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { translateGender } from '@/shared/utils';
 
 interface RegistrationRequestCardProps {
   user: UserDto;
 }
 export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) => {
-  const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(user.id, user.userRole);
+  const { handleApprove, handleReject, setUserRole } = useRegistrationRequestCard(
+    user.id,
+  );
 
   return (
-    <Card className='min-w-[330px] max-w-[440px] flex-1'>
+    <Card className='min-w-[330px] md:max-w-[400px] flex-1'>
       <CardHeader>
         <CardTitle className='text-xl'>{user.fullName}</CardTitle>
         <CardDescription>{user.phoneNumber}</CardDescription>
@@ -27,7 +43,7 @@ export const RegistrationRequestCard = ({ user }: RegistrationRequestCardProps) 
           </SelectContent>
         </Select>
         <div className='flex space-y-2 flex-col mt-3 text-sm'>
-          <span>{user.gender == 'male' ? 'Мужчина' : 'Женщина'}</span>
+          <span>{translateGender(user.gender)}</span>
           <span>{user.email}</span>
         </div>
       </CardContent>
