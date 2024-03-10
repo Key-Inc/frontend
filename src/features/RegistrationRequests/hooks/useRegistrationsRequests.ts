@@ -30,7 +30,6 @@ export const useRegistrationsRequests = () => {
     Page: params.get('Page'),
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fetchRegistrationRequests = async () => {
     try {
       const res = await getRegistrationRequests({ params: configParams });

@@ -1,4 +1,10 @@
-import { Input, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import {
+  Input,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui';
 import { Select } from '@/components/ui';
 import { useDebounce } from '@uidotdev/usehooks';
 import { useEffect, useState } from 'react';
@@ -39,37 +45,57 @@ export const Filtering = ({ setParamsByName, getParamsByName }: FilteringProps) 
       </div>
       <div>
         <span>Роль заявителя</span>
-        <Select defaultValue={getParamsByName('Role')} onValueChange={(value) => setParamsByName('Role', value)}>
+        <Select
+          defaultValue={getParamsByName('Role')}
+          onValueChange={(value) => setParamsByName('Role', value)}
+        >
           <SelectTrigger>
             <SelectValue placeholder='Роль' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='Student'>Студент</SelectItem>
             <SelectItem value='Teacher'>Учитель</SelectItem>
+            <SelectItem value='Dean'>Деканат</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div>
         <span>Сортировка</span>
-        <Select defaultValue={getParamsByName('Sorting')} onValueChange={(value) => setParamsByName('Sorting', value)}>
+        <Select
+          defaultValue={getParamsByName('Sorting')}
+          onValueChange={(value) => setParamsByName('Sorting', value)}
+        >
           <SelectTrigger>
             <SelectValue placeholder='Сортировка' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='CreateDesc'>Сначала старые</SelectItem>
             <SelectItem value='CreateAsc'>Сначала новые</SelectItem>
-            <SelectItem value='StartDateAsc'>Сначала заявки, которые начинаются первыми</SelectItem>
-            <SelectItem value='StartDateDesc'>Сначала заявки, которые начинаются последними</SelectItem>
+            <SelectItem value='StartDateAsc'>
+              Сначала заявки, которые начинаются первыми
+            </SelectItem>
+            <SelectItem value='StartDateDesc'>
+              Сначала заявки, которые начинаются последними
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div>
         <span>ФИО заявителя</span>
-        <Input placeholder='ФИО' value={fullName} onChange={(e) => setFullName(e.target.value)} />
+        <Input
+          placeholder='ФИО'
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
       </div>
       <div>
         <span>Количество заявок на странице</span>
-        <Input placeholder='Кол-во' type='number' value={size} onChange={(e) => setSize(e.target.value)} />
+        <Input
+          placeholder='Кол-во'
+          type='number'
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+        />
       </div>
     </div>
   );

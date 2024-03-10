@@ -9,8 +9,7 @@ export const useRegistrationRequestCard = (
   const [userRole, setUserRole] = useState('Student');
 
   const handleApprove = async () => {
-    //@ts-ignore
-    await putUserApprove(userid, userRole);
+    await putUserApprove(userid, { params: { userRole } });
     fetchRegistrationRequests();
   };
 
