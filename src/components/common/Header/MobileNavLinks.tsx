@@ -15,7 +15,6 @@ import { useHeader } from './hooks/useHeader';
 
 export const MobileNavLinks = () => {
   const [isSheetOpen, setSheetOpen] = useState(false);
-  const [isAuth, setIsAuth] = useState(true); //TODO: Когда будет чек стейта авторизации, убрать это
   const { handleLogout } = useHeader();
   return (
     <div className='md:hidden'>
@@ -31,49 +30,29 @@ export const MobileNavLinks = () => {
             <SheetTitle>Список страниц</SheetTitle>
             <SheetDescription className='h-full flex flex-col'>
               <nav className='items-center text-sm flex-auto justify-between flex-col space-y-4 my-6 '>
-                {isAuth &&
-                  HEADER_LINKS!.map((link, index) => (
-                    <div>
-                      <Link
-                        to={link.href}
-                        className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
-                        key={index}
-                        onClick={() => setSheetOpen(false)}
-                      >
-                        <span>{link.text}</span>
-                      </Link>
-                    </div>
-                  ))}
+                {HEADER_LINKS!.map((link, index) => (
+                  <div>
+                    <Link
+                      to={link.href}
+                      className='transition-colors hover:text-foreground/80 text-foreground/60 active:text-current'
+                      key={index}
+                      onClick={() => setSheetOpen(false)}
+                    >
+                      <span>{link.text}</span>
+                    </Link>
+                  </div>
+                ))}
               </nav>
-              {!isAuth && (
-                <div className='flex gap-2 items-center'>
-                  <Button onClick={() => setSheetOpen(false)}>
-                    <Link to='/registration'>
-                      <span>Зарегестрироваться</span>
-                    </Link>
-                  </Button>
-                  <Button>
-                    <Link to={'/login'} onClick={() => setSheetOpen(false)}>
-                      <span>Войти</span>
-                    </Link>
-                  </Button>
-                </div>
-              )}
-              {isAuth && (
-                <div className='flex gap-2 items-center justify-center'>
-                  <Button onClick={() => setSheetOpen(false)}>
-                    <Link to='/profile'>
-                      <span>
-                        {/* {email} */}
-                        тут еmail
-                      </span>
-                    </Link>
-                  </Button>
-                  <Button onClick={handleLogout}>
-                    <span>Выйти</span>
-                  </Button>
-                </div>
-              )}
+              <div className='flex gap-2 items-center justify-center'>
+                <Button onClick={() => setSheetOpen(false)}>
+                  <Link to='/profile'>
+                    <span>Профиль</span>
+                  </Link>
+                </Button>
+                <Button onClick={handleLogout}>
+                  <span>Выйти</span>
+                </Button>
+              </div>
             </SheetDescription>
           </SheetHeader>
         </SheetContent>
