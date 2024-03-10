@@ -17,5 +17,6 @@ export const useUserCard = (
   return {
     hadleChangeUserRole,
     setUserRole,
+    userRole,
   };
 };

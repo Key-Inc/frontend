@@ -27,7 +27,7 @@ export const useUsersList = () => {
       NameQuery: params.get('NameQuery'),
       Page: params.get('Page'),
     };
-
+    setUsers([]);
     try {
       const res = await getUsers({ params: configParams });
       setUsers(res.data.items);

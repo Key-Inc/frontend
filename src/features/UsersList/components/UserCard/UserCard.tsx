@@ -25,12 +25,11 @@ interface UserCardProps {
 }
 
 export const UserCard = ({ user, fetchUsers, resetPage }: UserCardProps) => {
-  const { hadleChangeUserRole, setUserRole } = useUserCard(
+  const { hadleChangeUserRole, setUserRole, userRole } = useUserCard(
     user.id,
     fetchUsers,
     resetPage,
   );
-  console.log(user);
 
   return (
     <Card className='min-w-[330px] md:max-w-[400px] flex-1'>
@@ -41,13 +40,15 @@ export const UserCard = ({ user, fetchUsers, resetPage }: UserCardProps) => {
       <CardContent className='flex flex-col'>
         <Select
           onValueChange={(value) => setUserRole(value)}
-          defaultValue='Student' //исправить
+          defaultValue={user.userRole}
+          disabled={user.userRole === 'Admin'}
         >
           <SelectTrigger className='w-[150px] h-8'>
             <SelectValue placeholder='Роль' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='Dean'>Декан</SelectItem>
+            {user.userRole === 'Admin' && <SelectItem value='Admin'>Админ</SelectItem>}
             <SelectItem value='Teacher'>Преподаватель</SelectItem>
             <SelectItem value='Student'>Студент</SelectItem>
           </SelectContent>
@@ -58,7 +59,11 @@ export const UserCard = ({ user, fetchUsers, resetPage }: UserCardProps) => {
         </div>
       </CardContent>
       <CardFooter className='flex justify-between'>
-        <Button variant='outline' onClick={hadleChangeUserRole}>
+        <Button
+          variant='outline'
+          onClick={hadleChangeUserRole}
+          disabled={user.userRole === 'Admin' || user.userRole === userRole}
+        >
           Сохранить
         </Button>
       </CardFooter>

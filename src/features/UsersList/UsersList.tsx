@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui';
+import { Input, Loader } from '@/components/ui';
 
 import { Pagination } from '@/components/common';
 import { useUsersList } from './hooks/useUserList';
@@ -19,14 +19,18 @@ export const UsersList = () => {
       </div>
 
       <div className='flex gap-4 flex-wrap items-center justify-center'>
-        {users.map((user, index) => (
-          <UserCard
-            user={user}
-            key={index}
-            fetchUsers={fetchUsers}
-            resetPage={() => setParamsByName('Page', '1')}
-          />
-        ))}
+        {users ? (
+          users.map((user, index) => (
+            <UserCard
+              user={user}
+              key={index}
+              fetchUsers={fetchUsers}
+              resetPage={() => setParamsByName('Page', '1')}
+            />
+          ))
+        ) : (
+          <Loader />
+        )}
       </div>
 
       <Pagination
