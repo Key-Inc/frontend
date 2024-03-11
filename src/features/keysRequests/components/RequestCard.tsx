@@ -7,7 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { convertDate, convertToLocaleDate } from '../utils/convertDate';
+import {
+  convertToDate,
+  convertToDateTime,
+  convertToLocaleDate,
+} from '../utils/convertDate';
 import { translateUserRole } from '@/shared/utils';
 
 export interface RequestCardProps {
@@ -26,11 +30,13 @@ export const RequestCard = ({ request, handleReject }: RequestCardProps) => {
         <p>
           {request.classroom.number} ({request.classroom.building})
         </p>
-        <p>Дата начала: {convertDate(convertToLocaleDate(request.startDate))}</p>
-        <p>Дата окончания: {convertDate(convertToLocaleDate(request.endDate))}</p>
+        <p>Дата начала: {convertToDateTime(convertToLocaleDate(request.startDate))}</p>
+        <p>Дата окончания: {convertToDateTime(convertToLocaleDate(request.endDate))}</p>
         <p>
           Повторяющаяся:{' '}
-          {request.endDateOfRecurrence ? `Да, до ${request.endDateOfRecurrence}` : 'Нет'}
+          {request.endDateOfRecurrence
+            ? `Да, до ${convertToDate(new Date(request.endDateOfRecurrence))}`
+            : 'Нет'}
         </p>
       </CardContent>
       <CardFooter>

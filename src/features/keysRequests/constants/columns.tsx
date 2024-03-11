@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui';
 import { ColumnDef } from '@tanstack/react-table';
-import { convertDate, convertToLocaleDate } from '../utils/convertDate';
+import {
+  convertToDate,
+  convertToDateTime,
+  convertToLocaleDate,
+} from '../utils/convertDate';
 import { translateRequestStatus, translateUserRole } from '@/shared/utils';
 
 export const getColumns = (
@@ -24,17 +28,17 @@ export const getColumns = (
     header: 'Кабинет, корпус',
   },
   {
-    accessorFn: (row) => convertDate(convertToLocaleDate(row.startDate)),
+    accessorFn: (row) => convertToDateTime(convertToLocaleDate(row.startDate)),
     header: 'Дата начала',
   },
   {
-    accessorFn: (row) => convertDate(convertToLocaleDate(row.endDate)),
+    accessorFn: (row) => convertToDateTime(convertToLocaleDate(row.endDate)),
     header: 'Дата окончания',
   },
   {
     accessorFn: (row) =>
       row.endDateOfRecurrence
-        ? `Да, до ${convertDate(convertToLocaleDate(row.endDateOfRecurrence))}`
+        ? `Да, до ${convertToDate(new Date(row.endDateOfRecurrence))}`
         : 'Нет',
     header: 'Повторяющаяся заявка',
   },

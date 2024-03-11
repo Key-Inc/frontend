@@ -6,6 +6,7 @@ export const useKeysList = () => {
   const [keyStatus, setKeyStatus] = useState('');
 
   const fetchKeys = async () => {
+    setKeys([]);
     const res = await getKeysList({ params: { keyStatus } });
     setKeys(res.data);
   };
