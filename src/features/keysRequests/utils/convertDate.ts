@@ -1,5 +1,4 @@
 export const convertToDateTime = (date: Date) => {
-  console.log(date, date.getHours());
   const day = addUnnecessaryZero(date.getDate());
   const year = date.getFullYear();
   const month = addUnnecessaryZero(date.getMonth() + 1);

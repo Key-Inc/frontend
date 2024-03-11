@@ -15,7 +15,6 @@ export const useProfileForm = () => {
 
   const onSubmit: SubmitHandler<UserEditDto> = async (data) => {
     try {
-      console.log(data);
       await putChangeProfile(data);
       toast('Профиль успешно обновлён');
     } catch (e) {
